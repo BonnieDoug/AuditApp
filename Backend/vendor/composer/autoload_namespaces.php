@@ -6,4 +6,6 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
+    'SolutionHost\\Tests' => array($baseDir . '/tests'),
+    'SolutionHost' => array($baseDir . '/src'),
 );

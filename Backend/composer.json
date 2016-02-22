@@ -10,5 +10,11 @@
     "minimum-stability": "dev",
     "require": {
         "vrana/notorm" : "master"
+    },
+    "autoload": {
+        "psr-0": {
+            "SolutionHost": "src/",
+            "SolutionHost\\Tests": "tests/"
+        }
     }
 }
