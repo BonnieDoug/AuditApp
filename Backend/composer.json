@@ -1,0 +1,14 @@
+{
+    "name": "solutionhost/api",
+    "description": "Solution-Host RestFull API for Audit application (Backend)",
+    "authors": [
+        {
+            "name": "Doug",
+            "email": "doug@hsdirect.co.uk"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {
+        "vrana/notorm" : "master"
+    }
+}
