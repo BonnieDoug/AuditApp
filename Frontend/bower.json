@@ -1,0 +1,25 @@
+{
+  "name": "auditapi-frontend",
+  "description": "Audit API Frontend, this should be as seperate as possible from the backend, simply relying on a JSON string sent from the backend to create views. There should be no reason why this front end couldnt be converted to Ruby/JS/VB or what ever, simply by changing the forloops...",
+  "main": "gulpfile.js",
+  "authors": [
+    "Doug"
+  ],
+  "license": "ISC",
+  "homepage": "https://github.com/BonnieDoug/AuditApp",
+  "moduleType": [
+    "globals",
+    "node"
+  ],
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap-sass": "bootstrap-sass-official#^3.3.6"
+  }
+}
