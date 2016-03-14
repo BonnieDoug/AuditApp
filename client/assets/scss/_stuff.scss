@@ -1,0 +1,126 @@
+
+body{
+    background-color: $secondary-color;
+}
+
+.container-padding{
+    box-shadow: 10px 10px 44px 3px rgba(0,0,0,0.75);
+    background-color: white;
+    padding: 20px;
+    /*margin: 0 4%;*/
+}
+.off-canvas{
+    border: 1px solid darken($primary-color, 10%);
+}
+
+
+footer{
+    z-index: 1;
+    min-height: 200px;
+    background-color: lighten($primary-color, 10%);
+}
+
+fieldset{
+    background: #FCFCFC;
+    padding: 16px;
+    border: 1px solid #D5D5D5;
+}
+.addfields{
+    margin: 10px 0;
+}
+
+#choicesDisplay {
+    padding: 10px;
+    background: rgb(227, 250, 227);
+    border: 1px solid rgb(171, 239, 171);
+    color: rgb(9, 56, 9);
+}
+
+.active-link-class{
+    background-color: lighten($primary-color, 10%);
+    // color: darken($primary-color, 20%) !important;
+    // border: 1px solid darken($primary-color, 20%);
+
+}
+
+.remove{
+    background: #C76868;
+    color: #FFF;
+    font-weight: bold;
+    font-size: 21px;
+    border: 0;
+    cursor: pointer;
+    display: inline-block;
+    padding: 4px 9px;
+    vertical-align: top;
+    line-height: 100%;   
+}
+input[type="text"],
+select{
+    padding:5px;
+}
+
+.grid-frame{
+    height: auto !important;
+    min-height: 100vh;
+}
+
+
+.menu-bar > li > a > img, .menu-bar > li > a > .iconic, .menu-bar.icon-top > li > a > img, .menu-bar.icon-top > li > a > .iconic{
+    margin: 0;
+    float: right !important;
+
+}
+
+
+.form-error{
+    background-color: red;
+    display: block;
+    width: 100%;
+    padding: 7px;
+    text-align: center;
+    margin: 10px 0;
+}
+
+.show-for-medium-inline {
+@include show-for(medium, inline-block);
+    //display: inline-block !important;
+}
+.show-for-medium-table {
+@include show-for(medium, table-cell);
+    //display: inline-block !important;
+}
+
+
+
+label{
+    font-weight: bold;
+    font-size: 1rem;
+    min-height: 30px;
+}
+
+.alternate:nth-child(even){
+    background-color: lighten($primary-color, 70%);
+}
+.alternate{
+    margin: 3px;
+    border: 1px solid lighten($primary-color, 65%);
+    border-radius: $global-radius;
+    padding: 10px;
+}
+.group{
+    padding: 20px;
+    margin: 5px 0;
+}
+
+.group-title-bar{
+    background-color: lighten($primary-color-hue, 10%);
+}
+
+.group-title-bar h2{
+    color: $white-color;
+}
+
+.button-nomargin{
+    margin: auto;
+}

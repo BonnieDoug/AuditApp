@@ -1,0 +1,52 @@
+<style type="text/css">
+    input.ng-invalid.ng-touched {
+        background-color: #FA787E;
+    }
+
+    input.ng-valid.ng-touched {
+        background-color: #78FA89;
+    }
+</style>
+
+<div ui-view>
+        
+    <h1>Login</h1>
+    <p class="lead">Not got an account? Give us a ring 01246123123</p>
+    <div class=" small-12">
+        <form name="loginForm" role="form" novalidate>
+
+            <div class="">
+                <label>
+                    Client Number
+                    <input name="client" placeholder="Client number" type="number" ng-model="user.client" required focus/>
+                </label>
+            </div>
+            <div class="">
+                <div ng-show="loginForm.$submitted || loginForm.username.$touched">
+                    
+                    <span class="form-error" zf-open="my-notify" ng-show="loginForm.username.$error.required">Username or Email is required.</span>
+                </div>
+                <label>
+                    Username
+                    <input name="username" required="" placeholder="Username or Email Address" type="text" ng-model="user.username">
+                </label>
+            </div>
+            <div class="">
+                <div  ng-show="loginForm.$submitted || loginForm.password.$touched">
+                    <span class="form-error" ng-show="loginForm.password.$error.required">Password is required.</span>
+                </div>
+                <label>
+                    Password
+                    <input name="password" required="" placeholder="Password" type="password" ng-model="user.password">
+                </label>
+            </div>
+
+            <button type="submit" href='#' class='button success expand'ng-click="doLogin(user)" data-ng-disabled="loginForm.$invalid" >Login <img zf-iconic="" icon="account" data-direction="right" size="medium"></button>
+
+        </form>
+        <div class="small-12 medium-6 grid-content">
+            <a ui-sref='forgotten-password'>Help I've forgotten my password.</a>
+        </div>
+    </div>
+</div>
+<!--</div>-->

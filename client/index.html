@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+    
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Audit App - Front End Prototype</title>
+        <link href="./assets/css/app.css" rel="stylesheet" type="text/css">
+        <script src="./assets/js/foundation.js"></script>
+        <script src="./assets/js/templates.js"></script>
+        <!--<script src="./assets/js/routes.js"></script>-->
+        <script src="./assets/js/app.js"></script>
+        <!--<script src="./assets/js/controllers/AuthController.js"></script>-->
+        <!--<script src="./assets/js/c1.js"></script>-->
+        <script src="./assets/js/angular-breadcrumb.js"></script>
+    </head>
+    
+    <body ng-app="application">
+        <!--Page container, this keeps everything in place, and ensures the footer stays at the bottom.-->
+        <div class="grid-block">
+            <!--The navigation bar at top :)-->
+            <nav class="grid-block dark shrink title-bar">
+                <div class="center title">Audit App - <br>Front End Prototype</div>
+                <span class="left">
+                    <a zf-open="menuBar" class="button warning"> &#9776; Menu</a>
+                </span>
+                <span class="right">
+                    <a ui-sref="login" class="button warning">Login <img zf-iconic="" icon="account"  size="small"></a>
+                </span>
+            </nav>
+            <!--Just a container for the moving bit in the middle, if you remove this then the animation of page changes is shit-->
+            <section class="grid-block">                
+                <!--This bit is the actually page, it loads the requested URL here.--> 
+                <section ng-class="['ui-animation']" ui-view class="small-12 medium-10 medium-offset-1 wrap main-content container-padding"></section>
+            </section>
+        </div>
+        <footer>
+            <p>This is the footer ... it needs some work doing to it but its here</p>
+        </footer>
+        <!--Include the off-canvas navigation partial. Put at the bottom so it's loaded last. 
+        Keeps Google happy because it would otherwise be classes as render blocking.-->
+        <nav ng-include="'./templates/includes/side-navbar.html'"></nav>
+    </body>
+</html>
