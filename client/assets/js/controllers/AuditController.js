@@ -12,7 +12,7 @@ app.controller('AuditController', function ($scope, DataSender, $stateParams) {
 
     $scope.doGetAudit = function () {
 
-        DataSender.get('Audit/get/' + $stateParams.id).then(function (audit) {
+        DataSender.get('Audit/get/' + $stateParams.anauditid).then(function (audit) {
             if (audit) {
                 $scope.audit = audit;
             } else {
@@ -21,8 +21,18 @@ app.controller('AuditController', function ($scope, DataSender, $stateParams) {
         });
     };
 
+
+    $scope.createNewAudit = function () {
+        $scope.audit = [{
+                "name": "",
+                "description": "",
+                "auditType": {"id": ""},
+            }];
+        $scope.audit.groups = [];
+    }
+
     $scope.doNewAudit = function (audit) {
-        alert("audit = " + audit);
+
         DataSender.post('Audit/New', {
             audit: audit
         }).then(function (results) {
@@ -39,46 +49,46 @@ app.controller('AuditController', function ($scope, DataSender, $stateParams) {
 
 
 
-    $scope.number = 5;
-    $scope.getNumber = function (num) {
-        return new Array(num);
-    };
+//    $scope.number = 5;
+//    $scope.getNumber = function (num) {
+//        return new Array(num);
+//    };
 
     $scope.questionType = [
         {
-            id: "1",
-            name: "Yes/No/NA"
+            "id": "1",
+            "name": "Yes/No/NA"
         },
         {
-            id: "2",
-            name: "Textbox"
+            "id": "2",
+            "name": "Textbox"
         },
         {
-            id: "3",
-            name: "Points"
+            "id": "3",
+            "name": "Points"
         }
     ];
 
     $scope.auditType = [
         {
-            name: "Safety Audit",
-            id: "1"
+            "name": "Safety Audit",
+            "id": "1"
         },
         {
-            name: "Legionella",
-            id: "2"
+            "name": "Legionella",
+            "id": "2"
         },
         {
-            name: "Gap Analysis",
-            id: "3"
+            "name": "Gap Analysis",
+            "id": "3"
         },
         {
-            name: "Employee Appraisal",
-            id: "4"
+            "name": "Employee Appraisal",
+            "id": "4"
         },
         {
-            name: "Sub Contractor Review",
-            id: "5"
+            "name": "Sub Contractor Review",
+            "id": "5"
         }
     ];
 
@@ -87,22 +97,22 @@ app.controller('AuditController', function ($scope, DataSender, $stateParams) {
     $scope.addGroup = function () {
         $scope.audit.groups.push(
                 {
-                    name: "Group Name",
-                    questions: []
+                    "name": "Group Name",
+                    "questions": []
                 });
     };
 
     $scope.addQuestion = function (gIndex) {
         $scope.audit.groups[gIndex].questions.push(
                 {
-                    placeholder: "Type question here.",
-                    question: "",
-                    selectedType: {id: '1'},
-                    answerRequired: "1",
-                    addEvidence: "0",
-                    evidenceRequired: "0",
-                    addExpiry: "0",
-                    expiryRequired: "0"
+                    "placeholder": "Type question here.",
+                    "question": "",
+                    selectedType: {"id": '1'},
+                    "answerRequired": "1",
+                    "addEvidence": "0",
+                    "evidenceRequired": "0",
+                    "addExpiry": "0",
+                    "expiryRequired": "0"
                 });
     };
 
@@ -116,6 +126,7 @@ app.controller('AuditController', function ($scope, DataSender, $stateParams) {
         $scope.audit.groups[gIndex].questions.splice(qIndex, 1);
 
     };
+
 
 
 });
