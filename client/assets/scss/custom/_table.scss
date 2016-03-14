@@ -2,13 +2,12 @@ table{
     width: 100%;
 }
 
-
-
 tr:nth-child(1) {
     height: 30px;
     background: lighten($primary-color, 10%);
     color: $secondary-color;
 }
+
 tr:nth-child(even) {
     background: darken($secondary-color, 0.5%);
 }

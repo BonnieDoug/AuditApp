@@ -1,88 +1,35 @@
-$text-color: #FFFFFF;
-$background-color-breadcrumbs: #666666;
-$background-color-breadcrumbs-crumb: #95bf45;
-$spacing-breadcrumbs: 10px;
 
 
+.breadcrumb, .breadcrumb ol {
+    display: flex;
+	width: 90%;
+	padding: 0.5em 1em;
+	margin: 1em auto;
+	border-radius: .25em;
 
-/*body {
-	text-align: center;
-	padding-top: 100px;
-	background: $background-color-breadcrumbs;
-	font-family: 'Merriweather Sans', arial, verdana;
-}*/
+	li {
+		display: inline-block;
+		float: left;
+		margin: 0.5em 0;
 
+		&::after {
+			display: inline-block;
+			content: '\00bb';
+			margin: 0 .6em;
+		}
 
-//center the breadcrumbs
-.breadcrumbs {
-	display: inline-block;
-  position: relative;
-  
-  .crumb {
-    transition: background .1s linear;
-	  text-decoration: none;
-	  float: left;
-	  font-size: 14px;
-	  color: $text-color;
-	  padding: 4px 0px 4px 8px + ($spacing-breadcrumbs * 2);
-	  background: $background-color-breadcrumbs-crumb;
-	  position: relative;
-    
-    //let remove a little spacing from the first crumb
-    &:first-child {
-	    padding-left: $spacing-breadcrumbs;
-    }
-    
-    //the last element will not look like the rest of the crumbs
-    &:last-child,
-    &:hover:last-child {
-	    padding-left: $spacing-breadcrumbs + 5px;
-      background: none;
-      cursor: text;
-    }
-    
-    //adding the arrows for the breadcrumbs using rotated pseudo elements
-    &:after {
-      transition: background .1s linear;
-	    content: '';
-	    position: absolute;
-	    top: 3px;
-      right: 1px - $spacing-breadcrumbs;
-      padding: 9px;
-	    z-index: 1;
-	    background: $background-color-breadcrumbs-crumb;
-      
-      //the scaling makes the top/bottom of the arrows flat
-	    transform: scale(.98) rotate(45deg);
-	    
-      //stylish arrow design using box shadow
-	    box-shadow:  2px -2px 0 1px $background-color-breadcrumbs;
-    }
+		&:last-of-type::after {
+			display: none;
+		}
+	}
+	
+	li > * {
+		/* single step */
+		display: inline-block;
+		font-size: 1.4rem;
+	}
 
-    //we need to move the last crumb seperator a little more the the left to cover up the background of the crumb itself
-    &:last-of-type:after {
-      right: -4px;
-    }
-
-    //no seperator for the crumb
-    &:last-child:after {
-      content: none;
-    }
-    
-    //text should be above the seperator
-    .text {
-	    position: relative;
-      z-index: 2;
-    }
-  }
-  
-  a:last-of-type .text {
-    padding-right: $spacing-breadcrumbs;
-  }
-  
-  //change background color on hover
-  a:hover,
-  a:hover:after {
-  	background: darken($background-color-breadcrumbs-crumb, 10);
-  }
 }
+
+
+	
