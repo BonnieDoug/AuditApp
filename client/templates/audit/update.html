@@ -49,12 +49,12 @@
         <!--THIS IS THE QUESTIONS-->
         <div class="grid-block small-12 wrap alternate" ng-repeat="question in group.questions">
             <div class="grid-content small-12 medium-8 large-4">
-                <label  for='question{{$parent.$index}}{{$index}}'>Question</label>
-                <input ng-model="question.question" id='question{{$parent.$index}}{{$index}}' type="text" value="{{question.question}}" placeholder="{{question.placeholder}}">
+                <label  for='question{{question.id}}'>Question</label>
+                <input ng-model="question.question" id='question{{question.id}}' type="text" value="{{question.question}}" placeholder="{{question.placeholder}}">
             </div>
             <div class="grid-content small-12 medium-4 large-2">
-                <label for='questionType{{$parent.$index}}{{$index}}'> Question Type</label>
-                <select name="questionType{{$parent.$index}}{{$index}}" id="questionType{{$parent.$index}}{{$index}}"
+                <label for='questionType{{question.id}}'> Question Type</label>
+                <select name="questionType{{question.id}}" id="questionType{{question.id}}"
                         ng-options="option.name for option in questionType track by option.id"
                         ng-model="question.answerType">                            
                 </select>
@@ -63,12 +63,12 @@
                 <label>Answer Required</label>
                 <ul class="button-group segmented">
                     <li>
-                        <input ng-model="question.answerRequired" name="answerRequired{{$parent.$index}}{{$index}}" ng-value="1" id="answerRequiredYes{{$parent.$index}}{{$index}}" type="radio">
-                        <label for="answerRequiredYes{{$parent.$index}}{{$index}}">Yes</label>
+                        <input ng-model="question.answerRequired" name="answerRequired{{question.id}}" ng-value="1" id="answerRequiredYes{{question.id}}" type="radio">
+                        <label for="answerRequiredYes{{question.id}}">Yes</label>
                     </li>
                     <li>
-                        <input ng-model="question.answerRequired" name="answerRequired{{$parent.$index}}{{$index}}" ng-value="0" id="answerRequiredNo{{$parent.$index}}{{$index}}" type="radio">
-                        <label for="answerRequiredNo{{$parent.$index}}{{$index}}">No</label>
+                        <input ng-model="question.answerRequired" name="answerRequired{{question.id}}" ng-value="0" id="answerRequiredNo{{question.id}}" type="radio">
+                        <label for="answerRequiredNo{{question.id}}">No</label>
                     </li>
                 </ul>
             </div>
@@ -76,12 +76,12 @@
                 <label>Add Evidence</label>
                 <ul class="button-group segmented">
                     <li>
-                        <input ng-model="question.addEvidence" name="addEvidence{{$parent.$index}}{{$index}}" value="1" id="addEvidenceYes{{$parent.$index}}{{$index}}" type="radio">
-                        <label for="addEvidenceYes{{$parent.$index}}{{$index}}">Yes</label>
+                        <input ng-model="question.addEvidence" name="addEvidence{{question.id}}" value="1" id="addEvidenceYes{{question.id}}" type="radio">
+                        <label for="addEvidenceYes{{question.id}}">Yes</label>
                     </li>
                     <li>
-                        <input ng-model="question.addEvidence" name="addEvidence{{$parent.$index}}{{$index}}" value="0" id="addEvidenceNo{{$parent.$index}}{{$index}}" type="radio">
-                        <label for="addEvidenceNo{{$parent.$index}}{{$index}}">No</label>
+                        <input ng-model="question.addEvidence" name="addEvidence{{question.id}}" value="0" id="addEvidenceNo{{question.id}}" type="radio">
+                        <label for="addEvidenceNo{{question.id}}">No</label>
                     </li>
                 </ul>
             </div>
@@ -89,12 +89,12 @@
                 <label>Evidence Required?</label>
                 <ul class="button-group segmented">
                     <li>
-                        <input ng-model="question.evidenceRequired" name="evidenceRequired{{$parent.$index}}{{$index}}" value="1" id="evidenceRequiredYes{{$parent.$index}}{{$index}}" type="radio">
-                        <label for="evidenceRequiredYes{{$parent.$index}}{{$index}}">Yes</label>
+                        <input ng-model="question.evidenceRequired" name="evidenceRequired{{question.id}}" value="1" id="evidenceRequiredYes{{question.id}}" type="radio">
+                        <label for="evidenceRequiredYes{{question.id}}">Yes</label>
                     </li>
                     <li>
-                        <input ng-model="question.evidenceRequired" name="evidenceRequired{{$parent.$index}}{{$index}}" value="0" id="evidenceRequiredNo{{$parent.$index}}{{$index}}" type="radio">
-                        <label for="evidenceRequiredNo{{$parent.$index}}{{$index}}">No</label>
+                        <input ng-model="question.evidenceRequired" name="evidenceRequired{{question.id}}" value="0" id="evidenceRequiredNo{{question.id}}" type="radio">
+                        <label for="evidenceRequiredNo{{question.id}}">No</label>
                     </li>
                 </ul>
             </div>
@@ -102,12 +102,12 @@
                 <label>Add Expiry?</label>
                 <ul class="button-group segmented">
                     <li>
-                        <input ng-model="question.addExpiry" name="addExpiry{{$parent.$index}}{{$index}}" value="1" id="addExpiryYes{{$parent.$index}}{{$index}}" type="radio">
-                        <label for="addExpiryYes{{$parent.$index}}{{$index}}">Yes</label>
+                        <input ng-model="question.addExpiry" name="addExpiry{{question.id}}" value="1" id="addExpiryYes{{question.id}}" type="radio">
+                        <label for="addExpiryYes{{question.id}}">Yes</label>
                     </li>
                     <li>
-                        <input ng-model="question.addExpiry" name="addExpiry{{$parent.$index}}{{$index}}" value="0" id="addExpiryNo{{$parent.$index}}{{$index}}" type="radio">
-                        <label for="addExpiryNo{{$parent.$index}}{{$index}}">No</label>
+                        <input ng-model="question.addExpiry" name="addExpiry{{question.id}}" value="0" id="addExpiryNo{{question.id}}" type="radio">
+                        <label for="addExpiryNo{{question.id}}">No</label>
                     </li>
                 </ul>
             </div>
@@ -115,12 +115,12 @@
                 <label>Expiry Required?</label>
                 <ul class="button-group segmented">
                     <li>
-                        <input ng-model="question.expiryRequired" name="expiryRequired{{$parent.$index}}{{$index}}" value="1" id="expiryRequiredYes{{$parent.$index}}{{$index}}" type="radio">
-                        <label for="expiryRequiredYes{{$parent.$index}}{{$index}}">Yes</label>
+                        <input ng-model="question.expiryRequired" name="expiryRequired{{question.id}}" value="1" id="expiryRequiredYes{{question.id}}" type="radio">
+                        <label for="expiryRequiredYes{{question.id}}">Yes</label>
                     </li>
                     <li>
-                        <input ng-model="question.expiryRequired" name="expiryRequired{{$parent.$index}}{{$index}}" value="0" id="expiryRequiredNo{{$parent.$index}}{{$index}}" type="radio">
-                        <label for="expiryRequiredNo{{$parent.$index}}{{$index}}">No</label>
+                        <input ng-model="question.expiryRequired" name="expiryRequired{{question.id}}" value="0" id="expiryRequiredNo{{question.id}}" type="radio">
+                        <label for="expiryRequiredNo{{question.id}}">No</label>
                     </li>
                 </ul>
             </div>

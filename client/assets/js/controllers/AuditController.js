@@ -54,6 +54,19 @@ app.controller('AuditController', function ($scope, DataSender, $stateParams) {
 //        return new Array(num);
 //    };
 
+
+
+    $scope.radioType = [
+        {
+            "value": "1",
+            "name": "Yes"
+        },
+        {
+            "value": "0",
+            "name": "No"
+        }
+    ];
+    
     $scope.questionType = [
         {
             "id": "1",

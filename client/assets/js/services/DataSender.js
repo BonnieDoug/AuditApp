@@ -1,7 +1,7 @@
 app.factory("DataSender", ['$http',
     function ($http) { // This service connects to our REST API
 
-        var serviceBase = 'http://localhost/Websites/SolutionMVC/public/';
+        var serviceBase = 'http://localhost/SolutionMVC/public/';
 
         var obj = {};
         obj.get = function (q) {
