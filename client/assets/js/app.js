@@ -3,6 +3,8 @@
     angular.module('application', [
         'ui.router',
 //        'ngRoute',
+        'ngAria',
+        'ngMaterial',
         'ngAnimate',
         'foundation',
         'foundation.dynamicRouting.animations',
@@ -84,6 +86,16 @@
                     },
                     ncyBreadcrumb: {
                         label: 'View Audit'
+                    }
+                })
+                .state('take-audit', {
+                    url: 'take-audit/',
+                    parent: 'auditcp',
+                    templateUrl: 'templates/audit/takeaudit.html',
+                    resolve: {
+                    },
+                    ncyBreadcrumb: {
+                        label: 'Take Audit'
                     }
                 })
                 .state('audit-delete', {

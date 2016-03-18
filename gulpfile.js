@@ -29,7 +29,8 @@ var paths = {
     'client/assets/scss',
     'client/assets/scss/custom/',
     'client/assets/scss/components/',
-    'bower_components/foundation-apps/scss'
+    'bower_components/foundation-apps/scss',
+    'node_modules/angular-material/'
   ],
   images: [
       'client/assets/images/**.**'
@@ -50,6 +51,8 @@ var paths = {
   // These files are for your app's JavaScript
   appJS: [
     'client/assets/js/app.js',
+    'node_modules/angular-aria/angular-aria.min.js',
+    'node_modules/angular-material/angular-material.js',
     'client/assets/js/c1.js',
     'client/assets/js/services/**.js',
     'client/assets/js/controllers/**.js',

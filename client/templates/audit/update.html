@@ -1,7 +1,7 @@
 <div ui-view ng-init="doGetAudit()">
 
-    
-    
+
+
     <h1>Update Audit: {{audit.name}}</h1>
     <!--</div>-->
     <!--<div class="">-->
@@ -17,7 +17,7 @@
         </div>
         <div class="small-12 medium-4 grid-content">
             <label for="short_description">
-                Short Description</label>
+                Description</label>
             <input  ng-model="audit.description" id="short_description" placeholder="Short Description" type="text">
 
         </div>
@@ -35,101 +35,98 @@
     <hr>
 
     <!--START THE GROUPS-->
-    <div class="grid-block wrap group" ng-repeat="group in audit.groups">
+    <div layout-padding class="grid-block wrap group" ng-repeat="group in audit.groups">
         <!--THIS IS THE GROUP HEADERS-->        
-        <div class="grid-block grbanoup-title-bar">
-            <div class="grid-content small-6 large-10">
+        <!--<div class="grid-block grbanoup-title-bar">-->
+        <div class="small-9 large-11">
+            <md-input-container class="md-block" flex-gt-sm>        
                 <label>Group Name</label>
-                <input ng-model="group.name" name="groupName" type="text" value="{{group.name}}">
-            </div>
-            <div class="grid-content small-6 large-2 v-align">
-                <button class="button alert expand margin-auto" ng-click="removeGroup($index)">Remove Group <img zf-iconic="" icon="ban"  size="small"></button>
-            </div>
+                <input ng-model="group.name" name="groupName" type="text" value="">
+            </md-input-container>
         </div>
+        <div class=" small-3 large-1 ">
+            <md-button class="float-right button margin-auto md-fab alert" ng-click="removeGroup($index)"><img style="margin:-3px 0 0 0;" zf-iconic="" icon="ban"  size="small"></md-button>
+        </div>
+        <!--</div>-->
         <!--THIS IS THE QUESTIONS-->
-        <div class="grid-block small-12 wrap alternate" ng-repeat="question in group.questions">
-            <div class="grid-content small-12 medium-8 large-4">
-                <label  for='question{{question.id}}'>Question</label>
-                <input ng-model="question.question" id='question{{question.id}}' type="text" value="{{question.question}}" placeholder="{{question.placeholder}}">
+        <div layout-padding class="grid-block small-12 wrap alternate" ng-repeat="question in group.questions">
+            <div class="small-12 medium-8 large-4">
+                <md-input-container class="md-block" flex-gt-sm>        
+                    <label>Question {{$parent.$index + 1}}.{{$index + 1}}</label>
+                    <textarea ng-model="question.question" md-maxlength="150" rows="5" md-select-on-focus></textarea>                    
+                </md-input-container>
             </div>
-            <div class="grid-content small-12 medium-4 large-2">
-                <label for='questionType{{question.id}}'> Question Type</label>
-                <select name="questionType{{question.id}}" id="questionType{{question.id}}"
-                        ng-options="option.name for option in questionType track by option.id"
-                        ng-model="question.answerType">                            
-                </select>
+
+
+            <div class="small-12 medium-4 large-2">
+                <md-input-container class="md-block" flex-gt-sm>
+                    <label> Question Type</label>
+                    <md-select ng-model="question.answerType" ng-model-options="{trackBy: '$value.id'}">
+                        <md-option ng-value="option" ng-repeat="option in questionType">{{ option.name}}</md-option>
+                    </md-select>
+                </md-input-container>
             </div>
-            <div class="grid-content small-6 medium-3 large-1">
-                <label>Answer Required</label>
-                <ul class="button-group segmented">
-                    <li>
-                        <input ng-model="question.answerRequired" name="answerRequired{{question.id}}" ng-value="1" id="answerRequiredYes{{question.id}}" type="radio">
-                        <label for="answerRequiredYes{{question.id}}">Yes</label>
-                    </li>
-                    <li>
-                        <input ng-model="question.answerRequired" name="answerRequired{{question.id}}" ng-value="0" id="answerRequiredNo{{question.id}}" type="radio">
-                        <label for="answerRequiredNo{{question.id}}">No</label>
-                    </li>
-                </ul>
+
+
+            <div class="small-6 medium-2 large-1 minus-margin-top">
+                <label class="small-label">Answer Required</label>
+
+                <div>
+                    <div class="switch-label float-left">No</div>
+                    <div class="switch-label float-right">Yes</div>
+                </div>
+                <md-slider class="md-primary" flex min="0" max="1" ng-model="question.answerRequired"></md-slider>
+
             </div>
-            <div class="grid-content small-6 medium-3 large-1">
-                <label>Add Evidence</label>
-                <ul class="button-group segmented">
-                    <li>
-                        <input ng-model="question.addEvidence" name="addEvidence{{question.id}}" value="1" id="addEvidenceYes{{question.id}}" type="radio">
-                        <label for="addEvidenceYes{{question.id}}">Yes</label>
-                    </li>
-                    <li>
-                        <input ng-model="question.addEvidence" name="addEvidence{{question.id}}" value="0" id="addEvidenceNo{{question.id}}" type="radio">
-                        <label for="addEvidenceNo{{question.id}}">No</label>
-                    </li>
-                </ul>
+            <div class="small-6 medium-2 large-1 minus-margin-top">
+                <label class="small-label">Add Evidence</label>
+                <div>
+                    <label class="switch-label float-left">No</label>
+                    <label class="switch-label float-right">Yes</label>
+                </div>
+                <md-slider class="md-primary" flex min="0" max="1" ng-model="question.addEvidence"></md-slider>
+
+
             </div>
-            <div class="grid-content small-6 medium-3 large-1">
-                <label>Evidence Required?</label>
-                <ul class="button-group segmented">
-                    <li>
-                        <input ng-model="question.evidenceRequired" name="evidenceRequired{{question.id}}" value="1" id="evidenceRequiredYes{{question.id}}" type="radio">
-                        <label for="evidenceRequiredYes{{question.id}}">Yes</label>
-                    </li>
-                    <li>
-                        <input ng-model="question.evidenceRequired" name="evidenceRequired{{question.id}}" value="0" id="evidenceRequiredNo{{question.id}}" type="radio">
-                        <label for="evidenceRequiredNo{{question.id}}">No</label>
-                    </li>
-                </ul>
+            <div class="small-6 medium-2 large-1 minus-margin-top">
+                <label class="small-label">Evidence Required?</label>
+
+                <div>
+                    <label class="switch-label float-left">No</label>
+                    <label class="switch-label float-right">Yes</label>
+                </div>
+                <md-slider class="md-primary" flex min="0" max="1" ng-model="question.evidenceRequired"></md-slider>
+
+
             </div>
-            <div class="grid-content small-6 medium-3 large-1">
-                <label>Add Expiry?</label>
-                <ul class="button-group segmented">
-                    <li>
-                        <input ng-model="question.addExpiry" name="addExpiry{{question.id}}" value="1" id="addExpiryYes{{question.id}}" type="radio">
-                        <label for="addExpiryYes{{question.id}}">Yes</label>
-                    </li>
-                    <li>
-                        <input ng-model="question.addExpiry" name="addExpiry{{question.id}}" value="0" id="addExpiryNo{{question.id}}" type="radio">
-                        <label for="addExpiryNo{{question.id}}">No</label>
-                    </li>
-                </ul>
+            <div class="small-6 medium-2 large-1 minus-margin-top">
+                <label class="small-label">Add Expiry?</label>
+
+                <div>
+                    <label class="switch-label float-left">No</label>
+                    <label class="switch-label float-right">Yes</label>
+                </div>
+                <md-slider class="md-primary" flex min="0" max="1" ng-model="question.addExpiry"></md-slider>
+
+
+
             </div>
-            <div class="grid-content small-6 medium-3 large-1">
-                <label>Expiry Required?</label>
-                <ul class="button-group segmented">
-                    <li>
-                        <input ng-model="question.expiryRequired" name="expiryRequired{{question.id}}" value="1" id="expiryRequiredYes{{question.id}}" type="radio">
-                        <label for="expiryRequiredYes{{question.id}}">Yes</label>
-                    </li>
-                    <li>
-                        <input ng-model="question.expiryRequired" name="expiryRequired{{question.id}}" value="0" id="expiryRequiredNo{{question.id}}" type="radio">
-                        <label for="expiryRequiredNo{{question.id}}">No</label>
-                    </li>
-                </ul>
+            <div class="small-6 medium-2 large-1 minus-margin-top">
+
+                <div style="position: relative;"><label class="small-label">Expiry Required?</label>
+                    <label class="switch-label float-left">No</label>
+                    <label class="switch-label float-right">Yes</label>
+                </div>
+                <md-slider class="md-primary" flex min="0" max="1" ng-model="question.expiryRequired"></md-slider>
+
+
             </div>
-            <div class="grid-content small-12 medium-6 large-1">
-                <button class='button alert expand margin-auto' ng-click="removeQuestion($parent.$index, $index)">Remove Question <img zf-iconic="" icon="ban" size="small"> </button>
+            <div class="small-6 medium-2 large-1">
+                <md-button class="float-right button margin-auto md-fab alert " ng-click="removeQuestion($parent.$index, $index)"><img style="margin:-3px 0 0 0;" zf-iconic="" icon="ban"  size="small"></md-button>
             </div>
         </div>
-        <div class="grid-content small-12">
-            <button class="button success expand" ng-click="addQuestion($index)">Add New Question to Group</button>
+        <div class="small-12">
+            <button class="button success expand md-hue-2" ng-click="addQuestion($index)">Add New Question to Group</button>
         </div>
     </div>
     <!--END THE GROUPS-->

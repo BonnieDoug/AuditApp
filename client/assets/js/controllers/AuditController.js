@@ -10,9 +10,13 @@ app.controller('AuditController', function ($scope, DataSender, $stateParams) {
         });
     };
 
+    $scope.takeAudit  = function (){
+        $scope.auditTake = [];
+    };
+
     $scope.doGetAudit = function () {
 
-        DataSender.get('Audit/get/' + $stateParams.anauditid).then(function (audit) {
+        DataSender.get('Audit/getAudit/' + $stateParams.anauditid).then(function (audit) {
             if (audit) {
                 $scope.audit = audit;
             } else {
@@ -23,17 +27,17 @@ app.controller('AuditController', function ($scope, DataSender, $stateParams) {
 
 
     $scope.createNewAudit = function () {
-        $scope.audit = [{
+        $scope.audit = {
                 "name": "",
                 "description": "",
                 "auditType": {"id": ""},
-            }];
+            };
         $scope.audit.groups = [];
     }
 
     $scope.doNewAudit = function (audit) {
 
-        DataSender.post('Audit/New', {
+        DataSender.post('Audit/NewAudit', {
             audit: audit
         }).then(function (results) {
             //if (results.status == "success") {
@@ -110,7 +114,7 @@ app.controller('AuditController', function ($scope, DataSender, $stateParams) {
     $scope.addGroup = function () {
         $scope.audit.groups.push(
                 {
-                    "name": "Group Name",
+                    "name": "",
                     "questions": []
                 });
     };

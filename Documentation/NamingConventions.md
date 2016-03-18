@@ -1,10 +1,15 @@
-<h1>"Audit App / SolutionMVC / SolutionORM" Naming conventions document</h1>
+<h1>"Audit App / SolutionMVC / SolutionORM" Naming conventions and other documentation.</h1>
 
 <p>
     This document is intended to outline the various naming conventions used in 
-    the listed projects. Some aspects of the code will not function if these 
-    conventions are not adhered to, whereas other conventions are simply for continuity.
+    the listed projects and also provide a basic understanding of how things work.
+    Some aspects of the framework code will not function if these conventions are 
+    not adhered to, whereas other conventions are simply for continuity and readability.
+    Where possible it is encouraged you stick to the conventions in order to make 
+    the code more future proofed, if all in house developers stick to these rules 
+    when new people join us they won't be flying so blind.
 </p>
+
 <p>
     I'll keep it as short and as simple as possible because no one likes reading 
     endless lines of shit.
@@ -44,6 +49,9 @@
 <h2>Actions</h2>
 <h3>Actions (PHP)</h3>
 <i>namespace SolutionMvc\Controller;</i>
+<p>Actions should only ever produce an output string. JSON/String/Int <STRONG>NEVER</STRONG> html or view content. 
+The front end should handle creating a view out of the output data. 
+This helps keep seperation of concerns and faciliates with unit testing.</p>
 <p>Actions are the base functions within controllers. They should be post fixed with Action, be camel cased with lowercase first latter.(Required for actions called by routes)</p>
 <code>For example you want to get User 10. The route would resemble https://localhost/User/getUser/10 this would call the getUserAction($id) from the UserController{} passing the '$id = 10' to the function.</code>
 <code>For example you want to get User username: dhayward, client: 000. The route would resemble https://localhost/User/getUser/dhayward/000 this would call the getUserAction($username, $client) from the UserController{} passing the '$username = "dhayward"', $client = "000"' to the function.</code>
@@ -86,4 +94,8 @@
 
 </code>
 
+<h3>Models (PHP)</h3>
+<p>Model classes should be simply the name of the table with no spaces and singular.</p>
+<code>Example: User.php (class User extends BaseModel{})</code>
+<code>Example: Answer.php (class Answer extends BaseModel{})</code>
 

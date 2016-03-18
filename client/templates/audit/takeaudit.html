@@ -1,0 +1,40 @@
+<div ui-view>
+    <!--<div ncy-breadcrumb></div>-->
+    <style>
+        .datepickerdemoBasicUsage {
+  /** Demo styles for mdCalendar. */ }
+  .datepickerdemoBasicUsage md-content {
+    padding-bottom: 200px; }
+  .datepickerdemoBasicUsage .validation-messages {
+    font-size: 11px;
+    color: darkred;
+    margin: 10px 0 0 25px; }
+  
+    </style>
+        <h1>Proto of taking an audit.</h1>
+        <div class="grid-block wrap">
+        <div class="small-3 grid-content">
+            <p >Question</p>            
+            <p>Yes/No Question</p>            
+        </div>           
+                 
+        <div class="small-3 grid-content">
+            
+            <label class='float-left'>Yes</label>
+            <!--<label class='float-center'>NA</label>-->
+            <label class='float-right'>No</label>
+            <input ng-model="audit.question.answer.answer" id="audit_name" placeholder="Audit Name" type="range" step='100'>
+            
+        </div>
+        <div class="small-3 grid-content">
+               <h4>Standard date-picker</h4>
+    <md-datepicker ng-model="myDate" md-placeholder="Enter date"></md-datepicker>
+        </div>
+        <div class="small-3 grid-content">
+            <label for="answer">
+                Expires</label>
+            <input ng-model="audit.question.answer.evidence" id="audit_name" type="file">
+        </div>
+    </div>
+
+</div>
