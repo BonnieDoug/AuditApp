@@ -15,14 +15,15 @@ app.controller('AuditController', function ($scope, DataSender, $stateParams) {
     };
 
     $scope.doGetAudit = function () {
-
+        $scope.dataLoaded = false;
         DataSender.get('Audit/getAudit/' + $stateParams.anauditid).then(function (audit) {
             if (audit) {
                 $scope.audit = audit;
+                $scope.dataLoaded = true;
             } else {
                 alert("No Data Sent");
             }
-        });
+        }, 200);
     };
 
 

@@ -1,25 +1,25 @@
-table{
+.table-100{
     width: 100%;
 }
 
-tr:nth-child(1) {
+.table-100 tr:nth-child(1) {
     height: 30px;
     background: lighten($primary-color, 10%);
     color: $secondary-color;
 }
 
-tr:nth-child(even) {
+.table-100 tr:nth-child(even) {
     background: darken($secondary-color, 0.5%);
 }
 
-tr:hover{
+.table-100 tr:hover{
     background-color: lighten($primary-color, 50%);
 }
 
-td .button{
+.table-100 td .button{
     margin: 10px;
 }
-td{
+.table-100 td{
     padding: 10px;
 }
 

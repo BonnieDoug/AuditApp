@@ -1,16 +1,11 @@
 <div ui-view ng-init="createNewAudit()">
 
 
-
     <h1>Create Audit: {{audit.name}}</h1>
-    <!--</div>-->
-    <!--<div class="">-->
     <p class='lead'>Create Audit.</p>
 
     <!--THIS IS THE PAGE HEADER SECTION-->
-    <!--<div layout-gt-sm="row">-->
 
-    <!--</div>-->
     <div layout-padding class="grid-block wrap">
         <div class="small-12 medium-4" >
             <md-input-container class="md-block" flex-gt-sm>        
@@ -37,8 +32,6 @@
         </div>
     </div>
     <!--<form name="userForm" novalidate>-->
-    <hr>
-
     <!--START THE GROUPS-->
     <div layout-padding class="grid-block wrap group" style="border:1px solid #ccc; border-radius: 3px; "ng-repeat="group in audit.groups">
         <!--THIS IS THE GROUP HEADERS-->        
@@ -49,7 +42,7 @@
             </md-input-container>
         </div>
         <div class="grid-content small-6 large-2 v-align">
-            <md-button class="button alert expand margin-auto md-warn md-raised md-hue-2" ng-click="removeGroup($index)"><img style="color: white" zf-iconic="" icon="ban"  size="small"></md-button>
+            <md-button class="button expand margin-auto md-warn md-fab md-raised alert" ng-click="removeGroup($index)"><img class="anti-margin" zf-iconic="" icon="ban"  size="small"></md-button>
         </div>
         <!--THIS IS THE QUESTIONS-->
         <div layout-padding class="grid-block small-12 wrap alternate" ng-repeat="question in group.questions">
@@ -112,11 +105,11 @@
                 </div>
                 <md-slider class="md-primary" flex min="0" max="1" ng-model="question.expiryRequired"></md-slider>
             </div>
-            <div class="grid-content small-12 medium-6 large-1">
-                <md-button class="button alert margin-auto md-warn md-raised" ng-click="removeQuestion($parent.$index, $index)"><img style="color: white" zf-iconic="" icon="ban"  size="small"></md-button>
+            <div class="small-6 medium-2 large-1">
+                <md-button class="float-right button margin-auto md-fab alert " ng-click="removeQuestion($parent.$index, $index)"><img style="margin:-3px 0 0 0;" zf-iconic="" icon="ban"  size="small"></md-button>
             </div>
         </div>
-        <div class="grid-content small-12">
+        <div class="small-12">
             <button class="button success expand" ng-click="addQuestion($index)">Add New Question to Group</button>
         </div>
     </div>

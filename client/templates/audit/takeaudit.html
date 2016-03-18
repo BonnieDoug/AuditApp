@@ -1,39 +1,77 @@
 <div ui-view>
     <!--<div ncy-breadcrumb></div>-->
-    <style>
-        .datepickerdemoBasicUsage {
-  /** Demo styles for mdCalendar. */ }
-  .datepickerdemoBasicUsage md-content {
-    padding-bottom: 200px; }
-  .datepickerdemoBasicUsage .validation-messages {
-    font-size: 11px;
-    color: darkred;
-    margin: 10px 0 0 25px; }
-  
-    </style>
-        <h1>Proto of taking an audit.</h1>
+    <!--    <style>
+            .datepickerdemoBasicUsage {
+                /** Demo styles for mdCalendar. */ }
+            .datepickerdemoBasicUsage md-content {
+                padding-bottom: 200px; }
+            .datepickerdemoBasicUsage .validation-messages {
+                font-size: 11px;
+                color: darkred;
+                margin: 10px 0 0 25px; }
+    
+        </style>-->
+    <h1>Proto of taking an audit.</h1>
+    <div layout-padding class="grid-block wrap">
+
+
         <div class="grid-block wrap">
-        <div class="small-3 grid-content">
-            <p >Question</p>            
-            <p>Yes/No Question</p>            
-        </div>           
-                 
-        <div class="small-3 grid-content">
-            
-            <label class='float-left'>Yes</label>
-            <!--<label class='float-center'>NA</label>-->
-            <label class='float-right'>No</label>
-            <input ng-model="audit.question.answer.answer" id="audit_name" placeholder="Audit Name" type="range" step='100'>
-            
+            <div class="small-12 medium-4 grid-content">
+                <label for="audit_name">
+                    Audit Name</label>
+                <input ng-model="audit.name" id="audit_name" placeholder="Audit Name" type="text">
+            </div>
+            <div class="small-12 medium-4 grid-content">
+                <label for="short_description">
+                    Description</label>
+                <input  ng-model="audit.description" id="short_description" placeholder="Short Description" type="text">
+
+            </div>
+            <div class="small-12 medium-4 grid-content">
+                <label for="audit_type">Audit Type</label>
+
+                <select name="auditType" id="auditType"
+                        ng-options="type.name for type in auditType track by type.id"
+                        ng-model="audit.auditType">                            
+                </select>
+
+            </div>
         </div>
-        <div class="small-3 grid-content">
-               <h4>Standard date-picker</h4>
-    <md-datepicker ng-model="myDate" md-placeholder="Enter date"></md-datepicker>
-        </div>
-        <div class="small-3 grid-content">
-            <label for="answer">
-                Expires</label>
-            <input ng-model="audit.question.answer.evidence" id="audit_name" type="file">
+        <div layout-padding class="grid-block small-12 wrap alternate">
+            <div layout-padding class="grid-block wrap group" >
+                <!--<div>-->
+                <div class="small-3 grid-content">
+                    <p>Question</p>            
+                    <p>Do they have sufficient hand washing facilities?</p>            
+                </div>           
+
+                <div class="small-2">
+
+                    <label class="small-label">Answer</label>
+                    <div>
+                        <label class="switch-label float-left">No</label>
+                        <label class="switch-label float-right">Yes</label>
+                    </div>
+                    <md-slider class="md-primary" flex min="0" max="1" ng-model="question.addEvidence"></md-slider>
+                </div>
+                <div class="small-2">
+
+
+                    <label>Expires</label>
+                    <md-datepicker ng-model="myDate" md-placeholder="Enter date"></md-datepicker>
+
+                </div>
+                <div class="small-2">
+                    <md-input-container class="md-block" flex-gt-sm>        
+                        <label>Notes</label>
+                        <textarea ng-model="question.question" md-maxlength="150" rows="5" md-select-on-focus></textarea>                    
+                    </md-input-container>
+                </div>
+                <div class="small-3">
+                    <label>Evidence</label>
+                    <input ng-model="audit.question.answer.evidence" id="audit_name" type="file">
+                </div>
+            </div>
         </div>
     </div>
 

@@ -1,7 +1,7 @@
 <div ui-view ng-init="doGetAudit()">
 
-
-
+<md-progress-circular style="margin: 0 auto; min-height: 200px; min-width: 200px;" md-diameter="196" ng-hide="dataLoaded">Loading...</md-progress-circular>
+ <!--<div ng-show="dataLoaded" layout-padding class="grid-block wrap">-->
     <h1>Update Audit: {{audit.name}}</h1>
     <!--</div>-->
     <!--<div class="">-->
@@ -9,33 +9,45 @@
 
     <!--THIS IS THE PAGE HEADER SECTION-->
 
-    <div class="grid-block wrap">
-        <div class="small-12 medium-4 grid-content">
-            <label for="audit_name">
-                Audit Name</label>
-            <input ng-model="audit.name" id="audit_name" placeholder="Audit Name" type="text">
+ <div ng-show="dataLoaded" layout-padding class="grid-block wrap">
+        <div class="small-12 medium-4" >
+            <md-input-container class="md-block" flex-gt-sm>        
+                <label>Audit Name</label>
+                <input ng-model="audit.name" id="audit_name" type="text">
+            </md-input-container>
         </div>
-        <div class="small-12 medium-4 grid-content">
-            <label for="short_description">
-                Description</label>
-            <input  ng-model="audit.description" id="short_description" placeholder="Short Description" type="text">
-
+        <div class="small-12 medium-4">
+            <md-input-container class="md-block" flex-gt-sm> 
+                <label for="short_description">
+                    Description</label>
+                <input  ng-model="audit.description" id="short_description" type="text">
+            </md-input-container>
         </div>
-        <div class="small-12 medium-4 grid-content">
-            <label for="audit_type">Audit Type</label>
-
-            <select name="auditType" id="auditType"
-                    ng-options="type.name for type in auditType track by type.id"
-                    ng-model="audit.auditType">                            
-            </select>
-
+        <div class="small-12 medium-4">
+            
+                            <md-input-container class="md-block" flex-gt-sm>
+                    <label> Question Type</label>
+                    <md-select ng-model="audit.auditType" ng-model-options="{trackBy: '$value.id'}">
+                        <md-option ng-value="type" ng-repeat="type in auditType">{{ type.name}}</md-option>
+                    </md-select>
+                </md-input-container>
+            
+            
+<!--            <md-input-container class="md-block" flex-gt-sm>
+                <label>Audit Type</label>
+                <md-select ng-model="audit.auditType">
+                    <md-option ng-repeat="type in auditType" value="{{type.id}}">
+                        {{type.name}}
+                    </md-option>
+                </md-select>
+            </md-input-container>-->
         </div>
     </div>
     <!--<form name="userForm" novalidate>-->
     <hr>
 
     <!--START THE GROUPS-->
-    <div layout-padding class="grid-block wrap group" ng-repeat="group in audit.groups">
+    <div  ng-show="dataLoaded" layout-padding class="grid-block wrap group" ng-repeat="group in audit.groups">
         <!--THIS IS THE GROUP HEADERS-->        
         <!--<div class="grid-block grbanoup-title-bar">-->
         <div class="small-9 large-11">
@@ -45,7 +57,7 @@
             </md-input-container>
         </div>
         <div class=" small-3 large-1 ">
-            <md-button class="float-right button margin-auto md-fab alert" ng-click="removeGroup($index)"><img style="margin:-3px 0 0 0;" zf-iconic="" icon="ban"  size="small"></md-button>
+            <md-button class="float-right button margin-auto md-fab alert" ng-click="removeGroup($index)"><img class="anti-margin" zf-iconic="" icon="ban"  size="small"></md-button>
         </div>
         <!--</div>-->
         <!--THIS IS THE QUESTIONS-->

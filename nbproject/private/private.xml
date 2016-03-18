@@ -3,22 +3,14 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/var/www/html/AuditApp/client/assets/js/app.js</file>
             <file>file:/var/www/html/AuditApp/client/templates/audit/takeaudit.html</file>
             <file>file:/var/www/html/AuditApp/client/assets/scss/app.scss</file>
             <file>file:/var/www/html/AuditApp/client/templates/audit/new.html</file>
             <file>file:/var/www/html/AuditApp/client/templates/audit/index.html</file>
+            <file>file:/var/www/html/AuditApp/client/templates/audit/update.html</file>
             <file>file:/var/www/html/AuditApp/client/assets/scss/_stuff.scss</file>
             <file>file:/var/www/html/AuditApp/client/index.html</file>
-            <file>file:/var/www/html/AuditApp/client/templates/audit/view.html</file>
             <file>file:/var/www/html/AuditApp/client/assets/scss/custom/_table.scss</file>
-            <file>file:/var/www/html/AuditApp/gulpfile.js</file>
-            <file>file:/var/www/html/AuditApp/client/assets/scss/custom/_switch.scss</file>
-            <file>file:/var/www/html/AuditApp/client/assets/scss/custom/_buttons.scss</file>
-            <file>file:/var/www/html/AuditApp/client/templates/audit/update.html</file>
-            <file>file:/var/www/html/AuditApp/client/assets/js/controllers/AuthController.js</file>
-            <file>file:/var/www/html/AuditApp/client/templates/home.html</file>
-            <file>file:/var/www/html/AuditApp/client/assets/js/controllers/AuditController.js</file>
         </group>
     </open-files>
 </project-private>

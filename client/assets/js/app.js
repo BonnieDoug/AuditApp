@@ -30,6 +30,10 @@
                     parent: 'account',
                     templateUrl: 'templates/login.html',
                     controller: 'AuthController',
+                    animation: {
+                        enter: 'slideInDown',
+                        leave: 'slideOutDown'
+                    },
                     resolve: {
                     },
                     ncyBreadcrumb: {
