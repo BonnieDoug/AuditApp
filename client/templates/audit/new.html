@@ -23,14 +23,16 @@
         <div class="small-12 medium-4">
             <md-input-container class="md-block" flex-gt-sm>
                 <label>Audit Type</label>
+                             
                 <md-select ng-model="audit.auditType">
-                    <md-option ng-repeat="type in auditType" value="{{type.id}}">
+                    <md-option ng-repeat="type in auditTypes" value="{{type.id}}">
                         {{type.name}}
                     </md-option>
                 </md-select>
             </md-input-container>
         </div>
     </div>
+    
     <!--<form name="userForm" novalidate>-->
     <!--START THE GROUPS-->
     <div layout-padding class="grid-block wrap group" style="border:1px solid #ccc; border-radius: 3px; "ng-repeat="group in audit.groups">
@@ -59,7 +61,7 @@
                 <md-input-container class="md-block" flex-gt-sm>
                     <label>Question Type</label>
                     <md-select ng-model="question.answerType">
-                        <md-option ng-repeat="option in questionType" value="{{option.id}}">
+                        <md-option ng-repeat="option in questionTypes" value="{{option.id}}">
                             {{option.name}}
                         </md-option>
                     </md-select>

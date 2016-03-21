@@ -1,5 +1,7 @@
 app.controller('AuditController', function ($scope, DataSender, $stateParams) {
 
+    var date = new Date();
+
     $scope.getAudits = function () {
         DataSender.get('Audit/index').then(function (audits) {
             if (audits) {
@@ -9,12 +11,21 @@ app.controller('AuditController', function ($scope, DataSender, $stateParams) {
             }
         });
     };
-
-    $scope.takeAudit  = function (){
-        $scope.auditTake = [];
+//$scope.takeAudit = [
+//];
+    $scope.doTakeAudit = function () {
+        
+        $scope.doGetAudit();
+        $scope.takeAudit = 
+            {
+                "auditor": "Doug",
+                "date": $scope.DateToday,
+            }
+        ;
     };
 
     $scope.doGetAudit = function () {
+               
         $scope.dataLoaded = false;
         DataSender.get('Audit/getAudit/' + $stateParams.anauditid).then(function (audit) {
             if (audit) {
@@ -28,11 +39,22 @@ app.controller('AuditController', function ($scope, DataSender, $stateParams) {
 
 
     $scope.createNewAudit = function () {
+        
+        DataSender.get('Audit/initialNewAuditData/').then(function (data) {
+            if (data) {
+                $scope.auditTypes = data.auditTypes;
+                $scope.questionTypes = data.questionTypes;
+//                alert(auditTypes)
+            } else {
+                alert("No Data Receive");
+            }
+        }, 200);
+        
         $scope.audit = {
-                "name": "",
-                "description": "",
-                "auditType": {"id": ""},
-            };
+            "name": "",
+            "description": "",
+//            "auditType": {"id": ""},
+        };
         $scope.audit.groups = [];
     }
 
@@ -52,66 +74,6 @@ app.controller('AuditController', function ($scope, DataSender, $stateParams) {
         });
     };
 
-
-
-//    $scope.number = 5;
-//    $scope.getNumber = function (num) {
-//        return new Array(num);
-//    };
-
-
-
-    $scope.radioType = [
-        {
-            "value": "1",
-            "name": "Yes"
-        },
-        {
-            "value": "0",
-            "name": "No"
-        }
-    ];
-    
-    $scope.questionType = [
-        {
-            "id": "1",
-            "name": "Yes/No/NA"
-        },
-        {
-            "id": "2",
-            "name": "Textbox"
-        },
-        {
-            "id": "3",
-            "name": "Points"
-        }
-    ];
-
-    $scope.auditType = [
-        {
-            "name": "Safety Audit",
-            "id": "1"
-        },
-        {
-            "name": "Legionella",
-            "id": "2"
-        },
-        {
-            "name": "Gap Analysis",
-            "id": "3"
-        },
-        {
-            "name": "Employee Appraisal",
-            "id": "4"
-        },
-        {
-            "name": "Sub Contractor Review",
-            "id": "5"
-        }
-    ];
-
-
-
     $scope.addGroup = function () {
         $scope.audit.groups.push(
                 {
@@ -124,13 +86,13 @@ app.controller('AuditController', function ($scope, DataSender, $stateParams) {
         $scope.audit.groups[gIndex].questions.push(
                 {
                     "placeholder": "Type question here.",
-                    "question": "",
-                    selectedType: {"id": '1'},
-                    "answerRequired": "1",
-                    "addEvidence": "0",
-                    "evidenceRequired": "0",
-                    "addExpiry": "0",
-                    "expiryRequired": "0"
+                    "question": " ",
+                    "selectedType": {"id": 1},
+                    "answerRequired": 1,
+                    "addEvidence": 0,
+                    "evidenceRequired": 0,
+                    "addExpiry": 0,
+                    "expiryRequired": 0
                 });
     };
 
@@ -145,7 +107,17 @@ app.controller('AuditController', function ($scope, DataSender, $stateParams) {
 
     };
 
+    $scope.DateToday = ('0' + date.getDate()).slice(-2) + '-' + ('0' + (date.getMonth() + 1)).slice(-2) + '-' + date.getFullYear();
 
+
+$scope.clear = function(pindex, cindex) {
+    alert(pindex + cindex);
+    $scope.audit.groups.questions.question[pindex].answer[cindex].evidence = null;
+  };
+  
+  
+  
+  
 
 });
 

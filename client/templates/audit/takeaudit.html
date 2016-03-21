@@ -1,78 +1,104 @@
-<div ui-view>
-    <!--<div ncy-breadcrumb></div>-->
-    <!--    <style>
-            .datepickerdemoBasicUsage {
-                /** Demo styles for mdCalendar. */ }
-            .datepickerdemoBasicUsage md-content {
-                padding-bottom: 200px; }
-            .datepickerdemoBasicUsage .validation-messages {
-                font-size: 11px;
-                color: darkred;
-                margin: 10px 0 0 25px; }
-    
-        </style>-->
+<div ui-view ng-init="doTakeAudit()">
+
     <h1>Proto of taking an audit.</h1>
     <div layout-padding class="grid-block wrap">
 
-
-        <div class="grid-block wrap">
-            <div class="small-12 medium-4 grid-content">
-                <label for="audit_name">
-                    Audit Name</label>
-                <input ng-model="audit.name" id="audit_name" placeholder="Audit Name" type="text">
+        <div layout-padding class="grid-block wrap">
+            <div class="small-6 medium-3" >       
+                <label>Audit Assigned to:</label><p>Someone Somewhere</p>
             </div>
-            <div class="small-12 medium-4 grid-content">
-                <label for="short_description">
-                    Description</label>
-                <input  ng-model="audit.description" id="short_description" placeholder="Short Description" type="text">
-
+            <div class="small-6 medium-3">
+                <label>Address Assigned to:</label><p>123 Street, Somewhere, Someplace, S41 1AB</p>
             </div>
-            <div class="small-12 medium-4 grid-content">
-                <label for="audit_type">Audit Type</label>
-
-                <select name="auditType" id="auditType"
-                        ng-options="type.name for type in auditType track by type.id"
-                        ng-model="audit.auditType">                            
-                </select>
-
+            <div class="small-6 medium-3">
+                <label>Completion Due By: </label><p>18-04-2016</p>
+            </div>
+            <div class="small-6 medium-3">
+                <label>Date Today: </label><p>{{ DateToday}}</p>
             </div>
         </div>
-        <div layout-padding class="grid-block small-12 wrap alternate">
-            <div layout-padding class="grid-block wrap group" >
-                <!--<div>-->
-                <div class="small-3 grid-content">
+
+
+        <div ng-show="dataLoaded" layout-padding class="grid-block wrap group" ng-repeat="group in audit.groups">
+            <h2>{{ group.name}}</h2>
+
+            <div layout-padding class="grid-block small-12 wrap alternate" ng-repeat="question in group.questions" ng-model="takeAudit.answers[question.id].parent_question">
+                <div class="small-6 medium-3">
                     <p>Question</p>            
-                    <p>Do they have sufficient hand washing facilities?</p>            
-                </div>           
-
+                    <p>{{ question.question}}</p>            
+                </div>
+                
+                {{ question.answerType.id}}
+                
                 <div class="small-2">
-
                     <label class="small-label">Answer</label>
-                    <div>
-                        <label class="switch-label float-left">No</label>
-                        <label class="switch-label float-right">Yes</label>
+                    <div class="grid-block">
+
+                        <div class="grid-content text-left switch-label">Bad</div>
+                        <div class="grid-content text-center switch-label">OK</div>
+                        <div class="grid-content text-right switch-label">Good</div>
+                        <div class="grid-content text-right switch-label">Great</div>
                     </div>
-                    <md-slider class="md-primary" flex min="0" max="1" ng-model="question.addEvidence"></md-slider>
-                </div>
-                <div class="small-2">
+                    <md-slider ng-model="takeAudit.answers[question.id].score" class="md-primary" flex step="1" min="0" max="3" ></md-slider>
+                    {{takeAudit.answers[question.id].score}}
+                </div> 
 
 
+                <div class="small-2" ng-if="question.addExpiry === 1">
                     <label>Expires</label>
-                    <md-datepicker ng-model="myDate" md-placeholder="Enter date"></md-datepicker>
+                    <md-datepicker ng-model="takeAudit.answers[question.id].expires" md-placeholder="Enter date"></md-datepicker>
+                </div>
+                <div class="small-2" ng-if="question.addExpiry === 0">
 
                 </div>
+
+
+
                 <div class="small-2">
                     <md-input-container class="md-block" flex-gt-sm>        
                         <label>Notes</label>
-                        <textarea ng-model="question.question" md-maxlength="150" rows="5" md-select-on-focus></textarea>                    
+                        <textarea ng-model="takeAudit.answers[question.id].notes" md-maxlength="150" rows="5" md-select-on-focus></textarea>                    
                     </md-input-container>
                 </div>
-                <div class="small-3">
+
+
+                <div class="small-3" ng-if="question.addEvidence === 1">
                     <label>Evidence</label>
-                    <input ng-model="audit.question.answer.evidence" id="audit_name" type="file">
+                    <input ng-model="takeAudit.answers[question.id].evidence" type="file">
                 </div>
-            </div>
+                <div class="small-3" ng-if="question.addEvidence === 0">
+                    <!--                    <label>Evidence</label>
+                                        <input ng-model="takeAudit.answers[question.id].evidence" type="file">-->
+                </div>
+            </div> 
+
+
         </div>
+
+
     </div>
 
+    {{takeAudit}}
+
+    <p>Audit Completion</p>
+
+    <div style="position: relative;">
+        <p>Low Example</p>
+        <label style="position: absolute; left: 18%; top:50px;">20%</label>
+        <meter min="0" max="100" low="25" high="75" optimum="100" value="20">20%</meter>
+    </div>
+    <div style="position: relative;">
+        <p>Medium Example</p>
+        <label style="position: absolute; left: 58%; top:50px;">60%</label>
+        <meter min="0" max="100" low="25" high="75" optimum="100" value="60">60%</meter>
+    </div>
+    <div style="position: relative;">
+        <p>High Example</p>
+        <label style="position: absolute; left: 88%; top:50px;">90%</label>
+        <meter min="0" max="100" low="25" high="75" optimum="100" value="90">90%</meter>
+    </div>
+    <md-progress-linear md-mode="determinate" value="60"></md-progress-linear>
+
+
 </div>
+

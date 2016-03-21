@@ -93,8 +93,9 @@
                     }
                 })
                 .state('take-audit', {
-                    url: 'take-audit/',
+                    url: 'take-audit/:anauditid',
                     parent: 'auditcp',
+                    controller: 'AuditController',
                     templateUrl: 'templates/audit/takeaudit.html',
                     resolve: {
                     },

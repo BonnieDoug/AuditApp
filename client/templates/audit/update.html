@@ -1,7 +1,7 @@
 <div ui-view ng-init="doGetAudit()">
 
-<md-progress-circular style="margin: 0 auto; min-height: 200px; min-width: 200px;" md-diameter="196" ng-hide="dataLoaded">Loading...</md-progress-circular>
- <!--<div ng-show="dataLoaded" layout-padding class="grid-block wrap">-->
+    <md-progress-circular style="margin: 0 auto; min-height: 200px; min-width300px;" md-diameter="596" ng-hide="dataLoaded">Loading...</md-progress-circular>
+    <!--<div ng-show="dataLoaded" layout-padding class="grid-block wrap">-->
     <h1>Update Audit: {{audit.name}}</h1>
     <!--</div>-->
     <!--<div class="">-->
@@ -9,7 +9,7 @@
 
     <!--THIS IS THE PAGE HEADER SECTION-->
 
- <div ng-show="dataLoaded" layout-padding class="grid-block wrap">
+    <div ng-show="dataLoaded" layout-padding class="grid-block wrap">
         <div class="small-12 medium-4" >
             <md-input-container class="md-block" flex-gt-sm>        
                 <label>Audit Name</label>
@@ -24,23 +24,14 @@
             </md-input-container>
         </div>
         <div class="small-12 medium-4">
-            
-                            <md-input-container class="md-block" flex-gt-sm>
-                    <label> Question Type</label>
-                    <md-select ng-model="audit.auditType" ng-model-options="{trackBy: '$value.id'}">
-                        <md-option ng-value="type" ng-repeat="type in auditType">{{ type.name}}</md-option>
-                    </md-select>
-                </md-input-container>
-            
-            
-<!--            <md-input-container class="md-block" flex-gt-sm>
-                <label>Audit Type</label>
-                <md-select ng-model="audit.auditType">
-                    <md-option ng-repeat="type in auditType" value="{{type.id}}">
-                        {{type.name}}
-                    </md-option>
+
+            <md-input-container class="md-block" flex-gt-sm>
+                <label> Question Type</label>
+                <md-select ng-model="audit.auditType" ng-model-options="{trackBy: '$value.id'}">
+                    <md-option ng-value="type" ng-repeat="type in auditType">{{ type.name}}</md-option>
                 </md-select>
-            </md-input-container>-->
+            </md-input-container>
+
         </div>
     </div>
     <!--<form name="userForm" novalidate>-->
