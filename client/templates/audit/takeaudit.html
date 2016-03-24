@@ -1,8 +1,6 @@
 <div ui-view ng-init="doTakeAudit()">
-
     <h1>Proto of taking an audit.</h1>
     <div layout-padding class="grid-block wrap">
-
         <div layout-padding class="grid-block wrap">
             <div class="small-6 medium-3" >       
                 <label>Audit Assigned to:</label><p>Someone Somewhere</p>
@@ -17,71 +15,45 @@
                 <label>Date Today: </label><p>{{ DateToday}}</p>
             </div>
         </div>
-
-
         <div ng-show="dataLoaded" layout-padding class="grid-block wrap group" ng-repeat="group in audit.groups">
             <h2>{{ group.name}}</h2>
-
-            <div layout-padding class="grid-block small-12 wrap alternate" ng-repeat="question in group.questions" ng-model="takeAudit.answers[question.id].parent_question">
-                <div class="small-6 medium-3">
-                    <p>Question</p>            
+            <div layout-padding class="grid-block small-12 wrap alternate text-center" ng-repeat="question in group.questions" ng-model="takeAudit.answers[question.id].parent_question">
+                <div class="small-12 medium-3">
+                    <h3 class="text-left">Question</h3>            
                     <p>{{ question.question}}</p>            
-                </div>
-                
-                {{ question.answerType.id}}
-                
-                <div class="small-2">
+                </div>                
+                <div class="small-12 medium-2">
                     <label class="small-label">Answer</label>
-                    <div class="grid-block">
-
-                        <div class="grid-content text-left switch-label">Bad</div>
-                        <div class="grid-content text-center switch-label">OK</div>
-                        <div class="grid-content text-right switch-label">Good</div>
-                        <div class="grid-content text-right switch-label">Great</div>
+                    <div class="grid-block" >                                                                      
+                        <div ng-repeat="option in question.answerType.options | orderObjectBy:'value'" class="grid-content text-align switch-label">{{option.name}}</div>
                     </div>
-                    <md-slider ng-model="takeAudit.answers[question.id].score" class="md-primary" flex step="1" min="0" max="3" ></md-slider>
+                    <md-slider md-discrete ng-model="takeAudit.answers[question.id].score" class="md-primary" style="margin: 0 1rem" flex step="{{question.answerType.optionSteps}}" min="0" max="{{question.answerType.optionMax}}" ></md-slider>
                     {{takeAudit.answers[question.id].score}}
                 </div> 
-
-
-                <div class="small-2" ng-if="question.addExpiry === 1">
+                <div class="small-12 medium-2" ng-if="question.addExpiry === 1">
                     <label>Expires</label>
                     <md-datepicker ng-model="takeAudit.answers[question.id].expires" md-placeholder="Enter date"></md-datepicker>
                 </div>
-                <div class="small-2" ng-if="question.addExpiry === 0">
-
+                <div class="small-12 medium-2" ng-if="question.addExpiry === 0">
+                    <label>No expiry required.</label>
                 </div>
-
-
-
-                <div class="small-2">
+                <div class="small-12 medium-2">
                     <md-input-container class="md-block" flex-gt-sm>        
                         <label>Notes</label>
                         <textarea ng-model="takeAudit.answers[question.id].notes" md-maxlength="150" rows="5" md-select-on-focus></textarea>                    
                     </md-input-container>
                 </div>
-
-
-                <div class="small-3" ng-if="question.addEvidence === 1">
+                <div class="small-12 medium-2" ng-if="question.addEvidence === 1">
                     <label>Evidence</label>
                     <input ng-model="takeAudit.answers[question.id].evidence" type="file">
                 </div>
-                <div class="small-3" ng-if="question.addEvidence === 0">
-                    <!--                    <label>Evidence</label>
-                                        <input ng-model="takeAudit.answers[question.id].evidence" type="file">-->
+                <div class="small-12 medium-2" ng-if="question.addEvidence === 0">                    
+                    <label>No evidence required.</label>
                 </div>
             </div> 
-
-
         </div>
-
-
     </div>
-
-    {{takeAudit}}
-
     <p>Audit Completion</p>
-
     <div style="position: relative;">
         <p>Low Example</p>
         <label style="position: absolute; left: 18%; top:50px;">20%</label>
@@ -98,7 +70,5 @@
         <meter min="0" max="100" low="25" high="75" optimum="100" value="90">90%</meter>
     </div>
     <md-progress-linear md-mode="determinate" value="60"></md-progress-linear>
-
-
 </div>
 

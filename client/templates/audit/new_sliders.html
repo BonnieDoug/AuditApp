@@ -1,12 +1,5 @@
 <div ui-view ng-init="createNewAudit()">
 
-
-    <style>
-        md-switch{
-            display: flex; align-items: center; justify-content: center;
-        }
-    </style>
-
     <h1>Create Audit: {{audit.name}}</h1>
     <p class='lead'>Create Audit.</p>
 
@@ -107,9 +100,7 @@
                         <label class="switch-label float-left">No</label>
                         <label class="switch-label float-right">Yes</label>
                     </div>
-                    <md-switch class="md-primary" aria-label="Switch" ng-model="question.addEvidence" ng-true-value="1" ng-false-value="0" ng-change="question.addEvidence ? 1 : question.evidenceRequired = 0"></md-switch>
-                    <!--
-                    <md-slider class="md-primary" flex min="0" max="1" ng-change="question.addEvidence ? 1 : question.evidenceRequired = 0" ng-model="question.addEvidence"></md-slider>-->
+                    <md-slider class="md-primary" flex min="0" max="1" ng-change="question.addEvidence ? 1 : question.evidenceRequired = 0" ng-model="question.addEvidence"></md-slider>
                 </div>
                 <div class="small-6 medium-3 large-1">
                     <label>Evidence Required?</label>
@@ -117,10 +108,7 @@
                         <label class="switch-label float-left">No</label>
                         <label class="switch-label float-right">Yes</label>
                     </div>
-
-                    <md-switch class="md-primary" aria-label="Switch" ng-model="question.evidenceRequired" ng-disabled="question.addEvidence !== 1" ng-true-value="1" ng-false-value="0"></md-switch>
-
-                    <!--<md-slider class="md-primary"  flex min="0" max="1" ng-model="question.evidenceRequired" ng-disabled="question.addEvidence !== 1" ></md-slider>-->
+                    <md-slider class="md-primary" flex min="0" max="1" ng-model="question.evidenceRequired" ng-disabled="question.addEvidence !== 1" ></md-slider>
                 </div>
                 <div class="small-6 medium-3 large-1">
                     <label>Add Expiry?</label>
@@ -128,11 +116,7 @@
                         <label class="switch-label float-left">No</label>
                         <label class="switch-label float-right">Yes</label>
                     </div>
-
-                    <md-switch class="md-primary" aria-label="Switch" ng-true-value="1" ng-false-value="0" ng-change="question.addExpiry ? 1 : question.expiryRequired = 0"  ng-model="question.addExpiry"></md-switch>
-
-
-                    <!--<md-slider class="md-primary" flex min="0" max="1" ng-change="question.addExpiry ? 1 : question.expiryRequired = 0"  ng-model="question.addExpiry"></md-slider>-->
+                    <md-slider class="md-primary" flex min="0" max="1" ng-change="question.addExpiry ? 1 : question.expiryRequired = 0"  ng-model="question.addExpiry"></md-slider>
                 </div>
                 <div class="small-6 medium-3 large-1">
                     <label>Expiry Required?</label>
@@ -140,11 +124,7 @@
                         <label class="switch-label float-left">No</label>
                         <label class="switch-label float-right">Yes</label>
                     </div>
-
-                    <md-switch class="md-primary" aria-label="Switch" ng-true-value="1" ng-false-value="0"  ng-model="question.expiryRequired" ng-disabled="question.addExpiry !== 1"></md-switch>
-
-
-                    <!--<md-slider class="md-primary" flex min="0" max="1"  ng-model="question.expiryRequired" ng-disabled="question.addExpiry !== 1"></md-slider>-->
+                    <md-slider class="md-primary" flex min="0" max="1"  ng-model="question.expiryRequired" ng-disabled="question.addExpiry !== 1"></md-slider>
                 </div>
                 <div class="small-12 medium-2 large-1">
                     <md-button class="float-right expand button margin-auto  alert " ng-click="removeQuestion($parent.$index, $index)"><i class="show-for-small-only">Remove Question</i><img style="margin:-3px 0 0 0;" zf-iconic="" icon="ban"  size="small"></md-button>
@@ -157,7 +137,7 @@
         <!--END THE GROUPS-->
         <button class='button success expand' ng-click="addGroup()">Add New Group</button>
         <button type="submit" class='primary button expand' ng-click="doSaveNewAudit(audit)">Save Audit</button>
-        <input type="submit" id="submit" value="Submit" />
+<input type="submit" id="submit" value="Submit" />
     </form>
 </div>
 

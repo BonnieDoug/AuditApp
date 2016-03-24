@@ -2,6 +2,9 @@ app.factory("DataSender", ['$http',
     function ($http) { // This service connects to our REST API
 
         var serviceBase = 'http://localhost/SolutionMVC/public/';
+        
+        //Config for Sandbox
+//        var serviceBase = 'http://doug.portal.solutionhost.co.uk/apps/Audit/SolutionMVC/public/';
 
         var obj = {};
         obj.get = function (q) {

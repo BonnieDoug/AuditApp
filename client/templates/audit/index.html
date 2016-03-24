@@ -1,30 +1,44 @@
 
 <div ui-view ng-init="getAudits()">
+
     <!--<div ncy-breadcrumb></div>-->
     <div class="grid-block">
         <h1>View all audits</h1>
     </div>
-    <!--<div class="grid-block">-->
+
+    <span class="inline-label">
+        <input ng-model="query" type="text"
+           placeholder="Filter by" autofocus>
+        <span class="form-label"><img zf-iconic="" icon=" magnifying-glass" data-direction="top" size="medium"></span>
+    </span>
+
+    
+
 
     <a class="expand success button" ui-sref="audit-new">Create New Audit</a>
 
-    
-    <table class="table-100">
+    <table class="text-center table-100">
         <tr>
-        <th>Audit Name</th>
-        <th class="show-for-medium-table">Description</th>        
-        <th class="show-for-medium-table">Audit Type</th>
-        <th class="show-for-medium-table">Created</th>
-        <th>Actions</th>
+            <th>Audit Name</th>
+            <th class="show-for-medium-table">Description</th>        
+            <th class="show-for-medium-table">Audit Type</th>
+            <th class="show-for-medium-table">Created</th>
+            <th>Actions</th>
         </tr>
-        
-        <tr ng-repeat="audit in audits">
+
+
+
+
+        <tr ng-repeat="audit in audits| toArray:false | filter:query | orderBy: 'name'">
+
+
+
             <td><a ui-sref='audit-view'>{{audit.name}}</a></td>
-            
-            <td class="show-for-medium-table">This column is only shown on medium up devices</td>
-            <td class="show-for-medium-table">This column is only shown on medium up devices</td>
+
+            <td class="show-for-medium-table">{{audit.description}}</td>
+            <td class="show-for-medium-table">{{audit.audit_type_name}}</td>
             <td class="show-for-medium-table">{{audit.created_at}}</td>
-            
+
             <td>
                 <div class="float-right" class="" zf-action-sheet="">
                     <div zf-as-button="" title="Actions"></div>
@@ -33,7 +47,7 @@
                         <ul>
                             <li><a ui-sref="audit-view">View</a></li>
                             <li><a ui-sref='audit-update({anauditid: audit.id})'>Edit</a></li>
-                            <li><a ui-sref="take-audit">Take Audit</a></li>
+                            <li><a ui-sref="take-audit({anauditid: audit.id})">Take Audit</a></li>
                             <li><a ui-sref="#">Assign</a></li>
                             <li>
                             <zf-action-sheet id="my-actionsheet">
@@ -49,24 +63,24 @@
                 </div>
             </td>
         </tr>
-        
-        
+
+
     </table>
-    
+
     <h3>This is a great place for pagination, though this one looks nice it doesn't really do anything yet.</h3>
-    
+
     <nav role="navigation">
-	<ul class="cd-pagination ">
-		<li><a class="button primary" href="#0">Prev</a></li>
-		<li class="show-for-medium-inline"><a href="#0">1</a></li>
-		<li class="show-for-medium-inline"><a href="#0">2</a></li>
-		<li class="show-for-medium-inline"><a class="current" href="#0">3</a></li>
-		<li class="show-for-medium-inline"><a href="#0">4</a></li>
-		<li class="show-for-medium-inline"><span>...</span></li>
-		<li class="show-for-medium-inline"><a href="#0">20</a></li>
-		<li><a class="button primary" href="#0">Next</a></li>
-	</ul>
-</nav> 
+        <ul class="cd-pagination ">
+            <li><a class="button primary" href="#0">Prev</a></li>
+            <li class="show-for-medium-inline"><a href="#0">1</a></li>
+            <li class="show-for-medium-inline"><a href="#0">2</a></li>
+            <li class="show-for-medium-inline"><a class="current" href="#0">3</a></li>
+            <li class="show-for-medium-inline"><a href="#0">4</a></li>
+            <li class="show-for-medium-inline"><span>...</span></li>
+            <li class="show-for-medium-inline"><a href="#0">20</a></li>
+            <li><a class="button primary" href="#0">Next</a></li>
+        </ul>
+    </nav> 
 
 
 </div>

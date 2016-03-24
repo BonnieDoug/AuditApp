@@ -2,10 +2,12 @@
     'use strict';
     angular.module('application', [
         'ui.router',
+        'angular-toArrayFilter',
 //        'ngRoute',
         'ngAria',
         'ngMaterial',
         'ngAnimate',
+        'ngMessages',
         'foundation',
         'foundation.dynamicRouting.animations',
         'ncy-angular-breadcrumb'
