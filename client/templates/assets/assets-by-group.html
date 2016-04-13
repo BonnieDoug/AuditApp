@@ -1,0 +1,101 @@
+<div ui-view ng-init="doGetAssetsByType()">
+
+    <!--<pre>
+        {{ assets|json }}
+        </pre>-->
+
+    
+
+    <div class="grid-block wrap">
+        <div class="grid-content">
+            <h1>{{ tyname }}'s</h1>
+        </div>
+        <div class="small-12 medium-4 grid-content text-right">
+            <md-content>
+                <md-input-container class="md-icon-float md-block">
+                    <input ng-model="query" type="text" placeholder="Search assets..." autofocus>
+                    <md-icon class="name"><i class="material-icons">&#xE8B6;</i></md-icon>
+                </md-input-container>
+            </md-content>
+        </div>
+    </div>
+    <div class="grid-block">
+        <a class="success button" ui-sref="asset-new">
+            <i class="material-icons">&#xE89C;</i>
+            Create a New Asset
+        </a>    
+    </div>
+    <div class="grid-block small-up-1 medium-up-2 large-up-4">
+        <table class="text-center table-100">
+            <tr>
+
+                <th ng-click="sort('forename')"> Name
+                    <i ng-show="sortKey == null" class="material-icons">&#xE258;</i>
+                    <i ng-show="sortKey == 'forename' && !reverse" class="material-icons">&#xE258;</i>
+                    <i ng-show="sortKey == 'forename' && reverse" class="material-icons">&#xE25A;</i>
+                </th>
+                <th ng-click="sort('surname')">Surname 
+                    <i ng-show="sortKey == 'surname' && !reverse" class="material-icons">&#xE258;</i>
+                    <i ng-show="sortKey == 'surname' && reverse" class="material-icons">&#xE25A;</i>
+                </th>        
+                <th ng-click="sort('address1')" class="show-for-medium-table">Address 
+                    <i ng-show="sortKey == 'address1' && !reverse" class="material-icons">&#xE258;</i>
+                    <i ng-show="sortKey == 'address1' && reverse" class="material-icons">&#xE25A;</i>
+                </th>        
+                <th ng-click="sort('county')" class="show-for-medium-table">County 
+                    <i ng-show="sortKey == 'county' && !reverse" class="material-icons">&#xE258;</i>
+                    <i ng-show="sortKey == 'county' && reverse" class="material-icons">&#xE25A;</i>
+                </th>        
+                <th ng-click="sort('country')" class="show-for-medium-table">Country 
+                    <i ng-show="sortKey == 'country' && !reverse" class="material-icons">&#xE258;</i>
+                    <i ng-show="sortKey == 'country' && reverse" class="material-icons">&#xE25A;</i>
+                </th>             
+                <th ng-click="sort('postcode')" class="show-for-medium-table">Postcode 
+                    <i ng-show="sortKey == 'postcode' && !reverse" class="material-icons">&#xE258;</i>
+                    <i ng-show="sortKey == 'postcode' && reverse" class="material-icons">&#xE25A;</i>
+                </th>        
+                <!--<th>ID</th>-->
+                <!--<th>Name</th>-->
+                <!--<th>Location</th>-->
+                <th class="show-for-medium-table">Image</th>
+                <th></th>
+            </tr>
+
+            <tr dir-paginate="asset in assets| toArray: false | filter:query | orderBy: sortKey:reverse|itemsPerPage:10" ng-class="{leave: startFade}" ng-hide="asset.isHidden">
+
+                <!--<td>{{asset.id}}</td>-->
+                <td>{{asset.forname}} {{asset.middlename}}</td>
+                <td>{{asset.surname}}</td>
+                <td class="show-for-medium-table">{{asset.address1}}, {{asset.address2}}</td>
+                <td class="show-for-medium-table">{{asset.county}}</td>
+                <td class="show-for-medium-table">{{asset.country}}</td>
+                <td class="show-for-medium-table">{{asset.postcode}}</td>
+                <td class="show-for-medium-table"><img class="thumbnail preview-image" src="http://localhost/Filestore/images/{{asset.image}}"></td>
+                <td>
+                    <div class="float-right" class="" zf-action-sheet="">
+                        <div zf-as-button="" title="Actions"></div>
+                        <div zf-as-content="" position="bottom">
+                            <ul>
+                                <li><a ui-sref="asset-view({anauditid: audit.id})">View</a></li>
+                                <li><a ui-sref='asset-update({anauditid: audit.id})'>Edit</a></li>
+                                <li>
+                                <zf-action-sheet id="my-actionsheet">
+                                    <md-button class="md-primary md-raised" ng-click="showConfirm($event, asset.id, $index)" >
+                                        Retire Asset
+                                    </md-button>
+                                </zf-action-sheet>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <dir-pagination-controls
+        max-size="5"
+        direction-links="true"
+        boundary-links="true" >
+    </dir-pagination-controls>
+
+</div>

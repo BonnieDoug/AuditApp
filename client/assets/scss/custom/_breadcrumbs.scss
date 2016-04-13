@@ -1,12 +1,14 @@
 
 
 .breadcrumb, .breadcrumb ol {
+    /*font-size: 1pt;*/
     display: flex;
 	width: 100%;
-	padding: 0.5em 1em;
-	margin: 1em auto;
+	/*padding: 0.5em 1em;*/
+	/*margin: 1em auto;*/
 	border-radius: .25em;
 
+        
 	li {
 		display: inline-block;
 		float: left;
@@ -26,7 +28,7 @@
 	li > * {
 		/* single step */
 		display: inline-block;
-		font-size: 1.4rem;
+		font-size: 0.9rem;
 	}
 
 }

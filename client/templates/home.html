@@ -2,7 +2,7 @@
 <!--Include breadcrumbs on all pages-->
 <ol ncy-breadcrumb></ol>
 <div ui-view>
-    
+
     <div class="grid-content small-12">
         <h1>Dashboard</h1>
         <h3 class="subheader">Some sort of pretty, descriptive paragraph here to fill some space and help the user understand whats going on.
@@ -10,7 +10,7 @@
     </div>
 
 
-    <div class="grid-block small-up-1 medium-up-2 large-up-3">
+    <div class="grid-block small-up-1 medium-up-2 large-up-4">
         <div class="grid-content">
             <div class="primary card">
                 <a ui-sref="auditcp"><img src="http://placehold.it/350x100"></a>
@@ -24,6 +24,18 @@
             </div>
         </div>
         <div class="grid-content">
+            <div class="alert card">
+                <a ui-sref="auditnew"><img src="http://placehold.it/350x100"></a>
+                <div class="card-divider">
+                    <h4>Asset Manager</h4>
+                </div>
+                <div class="card-section">
+                    <!--<p>Go here to create new audits.</p>-->
+                    <a class="button saturate-alert expand" ui-sref="assets-index">Asset Manager</a>
+                </div>
+            </div>
+        </div>
+        <div class="grid-content">
             <div class="warning card">
                 <a ui-sref="auditnew"><img src="http://placehold.it/350x100"></a>
                 <div class="card-divider">
@@ -31,7 +43,7 @@
                 </div>
                 <div class="card-section">
                     <!--<p>Go here to create new audits.</p>-->
-                    <a class="button saturate-warning expand" ui-sref="auditnew">Reporting Suite</a>
+                    <a class="button saturate-warning expand" ui-sref="reporting-index">Reporting Suite</a>
                 </div>
             </div>
         </div>

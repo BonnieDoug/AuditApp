@@ -11,7 +11,7 @@ var gulp     = require('gulp');
 var rimraf   = require('rimraf');
 var router   = require('front-router');
 var sequence = require('run-sequence');
-
+//var uglify = require('gulp-uglify');
 // Check for --production flag
 var isProduction = !!(argv.production);
 
@@ -45,6 +45,8 @@ var paths = {
     'bower_components/angular-animate/angular-animate.js',
     'bower_components/angular-messages/angular-messages.js',
     'bower_components/angular-ui-router/release/angular-ui-router.js',
+    'bower_components/ng-sortable/dist/ng-sortable.min.js',
+    'bower_components/angularUtils-pagination/dirPagination.js',    
     'bower_components/angular-toArrayFilter/toArrayFilter.js',
     'bower_components/foundation-apps/js/vendor/**/*.js',
     'bower_components/foundation-apps/js/angular/**/*.js',
@@ -59,8 +61,9 @@ var paths = {
     'client/assets/js/services/**.js',
     'client/assets/js/controllers/**.js',
     'bower_components/angular-breadcrumb/dist/angular-breadcrumb.min.js',
+    'bower_components/ng-file-upload/ng-file-upload.min.js'
   ]
-}
+};
 
 // 3. TASKS
 // - - - - - - - - - - - - - - -
@@ -130,7 +133,7 @@ gulp.task('sass', function () {
 });
 
 // Compiles and copies the Foundation for Apps JavaScript, as well as your app's custom JS
-gulp.task('uglify', ['uglify:foundation', 'uglify:app'])
+gulp.task('uglify', ['uglify:foundation', 'uglify:app']);
 
 gulp.task('uglify:foundation', function(cb) {
   var uglify = $.if(isProduction, $.uglify()

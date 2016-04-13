@@ -1,4 +1,7 @@
 <div ui-view ng-init="doTakeAudit()">
+    
+    {{ audit.answerType.options }} 
+    
     <h1>Proto of taking an audit.</h1>
     <div layout-padding class="grid-block wrap">
         <div layout-padding class="grid-block wrap">
@@ -15,7 +18,10 @@
                 <label>Date Today: </label><p>{{ DateToday}}</p>
             </div>
         </div>
-        <div ng-show="dataLoaded" layout-padding class="grid-block wrap group" ng-repeat="group in audit.groups">
+        <div  layout-padding class="grid-block wrap group" ng-repeat="group in audit.groups">
+            
+            
+            
             <h2>{{ group.name}}</h2>
             <div layout-padding class="grid-block small-12 wrap alternate text-center" ng-repeat="question in group.questions" ng-model="takeAudit.answers[question.id].parent_question">
                 <div class="small-12 medium-3">
@@ -27,7 +33,7 @@
                     <div class="grid-block" >                                                                      
                         <div ng-repeat="option in question.answerType.options | orderObjectBy:'value'" class="grid-content text-align switch-label">{{option.name}}</div>
                     </div>
-                    <md-slider md-discrete ng-model="takeAudit.answers[question.id].score" class="md-primary" style="margin: 0 1rem" flex step="{{question.answerType.optionSteps}}" min="0" max="{{question.answerType.optionMax}}" ></md-slider>
+                    <md-slider  ng-model="takeAudit.answers[question.id].score" class="md-primary" style="margin: 0 1rem" flex step="{{question.answerType.optionSteps}}" min="0" max="{{question.answerType.optionMax}}" ></md-slider>
                     {{takeAudit.answers[question.id].score}}
                 </div> 
                 <div class="small-12 medium-2" ng-if="question.addExpiry === 1">

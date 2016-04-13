@@ -1,0 +1,165 @@
+<div class='new-asset' ui-view ng-init="newAsset()">
+    <h1>Add Asset</h1>
+
+    <md-content ng-controller="TabsController" ng-cloak>
+        <md-tabs md-dynamic-height md-border-bottom md-selected="selectedIndex">
+            <md-tab label="Asset Type">
+                <md-content class="md-padding">
+                    <h1 class="md-display-2">Asset Type</h1>
+                    <label>Asset Group
+
+                        
+                        <md-button                            
+                            class="md-icon-button launch" >
+                            <i ng-if="!asset.AssetGroups_id" style='color:red;' class="material-icons">&#xE002;</i>
+                            <i ng-if="asset.AssetGroups_id" style='color:green;' class="material-icons success">&#xE876;</i>
+                            <md-tooltip md-direction="bottom">
+                                An Asset Group is Required
+                            </md-tooltip>
+                        </md-button>
+
+                    </label>
+                    <select required ng-model="asset.AssetGroups_id" ng-value='group.id' ng-options="group.name for group in AssetGroups"> 
+                    </select>
+
+                    <label>Asset Type
+                        <md-button                             
+                            class="md-icon-button launch" >
+                            <i ng-if="!asset.AssetTypes_id" style='color:red;' class="material-icons">&#xE002;</i>
+                            <i ng-if="asset.AssetTypes_id" style='color:green;' class="material-icons success">&#xE876;</i>
+                            <md-tooltip md-direction="bottom">
+                                An Asset Type is Required
+                            </md-tooltip>
+                        </md-button>
+                    </label>
+                    <select ng-disabled="!asset.AssetGroups_id" ng-model="asset.AssetTypes_id" ng-options="type.name for type in asset.AssetGroups_id.AssetTypes">
+                    </select>
+
+
+
+
+                    <label>Upload Image</label>
+                    <p>Help identification by uploading an image.</p>
+                    <md-input-container class="md-block" flex-gt-sm>                       
+
+                        <div ngf-drop="onFileSelect($files)" class="drop-box" ng-model="asset.file"
+                             ngf-drag-over-class="'dragover'"
+                             ngf-pattern="'image/*,application/pdf'">
+
+                            <h3 ng-if="!asset.file">Drag and Drop Image Here</h3>
+                            
+                            <img ng-if="asset.file"
+                                 ngf-src="asset.file" 
+                                 ngf-background="asset.file"          
+                                 ngf-no-object-url="true or false" 
+                                 >
+                        </div>
+                        or 
+                        <div class="button" ngf-select="onFileSelect($files)" ng-model="asset.file" name="file" ngf-pattern="'image/*'"
+                             ngf-accept="'image/*'" ngf-max-size="20MB" ngf-min-height="100" 
+                             >Select File</div>
+                        <div ngf-no-file-drop>File Drag/Drop is not supported for this browser</div>
+                    </md-input-container>                 
+
+                    <md-button ng-disabled="!asset.AssetTypes_id" class="md-raised md-primary float-right" ng-click="nextTab()">Next Stage</md-button>
+
+                </md-content>
+            </md-tab>
+            <md-tab ng-disabled="!asset.AssetTypes_id" label="Asset Details">
+                <md-content class="md-padding">
+                    <h1 class="md-display-2">Asset Details</h1>
+                    <md-input-container class="md-block" flex-gt-sm>        
+                        <label>{{asset.AssetGroups_id.forename_label}}</label>
+                        <input ng-model="asset.forename" name="forename" type="text" required>
+                        <div ng-messages="form.forename.$error">
+                            <div ng-message="required">Please name this group.</div>
+                        </div>
+                    </md-input-container>
+
+                    <md-input-container ng-if="asset.AssetGroups_id.middlename_label" class="md-block" flex-gt-sm>        
+                        <label>{{asset.AssetGroups_id.middlename_label}}</label>
+                        <input ng-model="asset.middlename" name="middlename" type="text">
+                    </md-input-container>
+
+                    <md-input-container class="md-block" flex-gt-sm>        
+                        <label>{{asset.AssetGroups_id.surname_label}}</label>
+                        <input ng-model="asset.surname" name="surname" type="text" required>
+                        <div ng-messages="form.surname.$error">
+                            <div ng-message="required">Please name this group.</div>
+                        </div>
+                    </md-input-container>
+
+                    <md-input-container class="md-block" flex-gt-sm>        
+                        <label>{{asset.AssetGroups_id.uniquecode_label}}</label>
+                        <input ng-model="asset.unique_ref_code" name="unique_ref_code" type="text" required>
+                        <div ng-messages="form.unique_ref_code.$error">
+                            <div ng-message="required">Please name this group.</div>
+                        </div>
+                    </md-input-container>
+
+                    <div class="md-block" flex-gt-sm>
+                        <label>{{asset.AssetGroups_id.dob_label}}</label>
+                        <md-datepicker ng-model="asset.dob" md-placeholder="Enter {{asset.AssetGroups_id.dob_label}}"></md-datepicker>
+                    </div>
+                    <br><br>
+                    <div class="md-block" flex-gt-sm>        
+                        <label>{{asset.AssetGroups_id.start_label}}</label>
+                        <md-datepicker ng-model="asset.start_date" md-placeholder="Enter {{asset.AssetGroups_id.start_label}}"></md-datepicker>
+                    </div>
+
+                    <md-button ng-disabled="!asset.forename" class="md-raised md-primary float-right" ng-click="nextTab()">Next Stage</md-button>
+
+                </md-content>
+            </md-tab>
+            <md-tab ng-disabled="!asset.forename" label="Asset Location">
+                <md-content class="md-padding">
+                    <h1 class="md-display-2">Asset Location</h1>
+                    <md-input-container class="md-block" flex-gt-sm>        
+                        <label>Address Line 1</label>
+                        <input ng-model="asset.address1" name="address1" type="text" required>
+                        <div ng-messages="form.address1.$error">
+                            <div ng-message="required">Please name this group.</div>
+                        </div>
+                    </md-input-container>
+
+                    <md-input-container class="md-block" flex-gt-sm>        
+                        <label>Address Line 2</label>
+                        <input ng-model="asset.address2" name="address2" type="text" required>
+                        <div ng-messages="form.address2.$error">
+                            <div ng-message="required">Please name this group.</div>
+                        </div>
+                    </md-input-container>
+                    <md-input-container class="md-block" flex-gt-sm>        
+                        <label>Postcode</label>
+                        <input ng-model="asset.postcode" name="postcode" type="text" required>
+                        <div ng-messages="form.postcode.$error">
+                            <div ng-message="required">Please name this group.</div>
+                        </div>
+                    </md-input-container>
+
+                    <md-input-container class="md-block" flex-gt-sm>     
+                        <label>County</label>
+                        <md-select ng-model="asset.county" placeholder="Select a County">
+                            <md-option  ng-value="county.id" ng-repeat="county in Counties">{{ county.name}}</md-option>
+                        </md-select>
+                    </md-input-container>
+                    <br><br>
+                    <md-input-container class="md-block" flex-gt-sm>            
+                        <label>Country</label>
+                        <md-select ng-model="asset.country.id" ng-model-options="{trackBy: '$value'}">
+                            <md-option ng-value="country.id" ng-repeat="country in Countries">{{ country.name}}</md-option>
+                        </md-select>
+                    </md-input-container>
+
+                    <md-button class="md-raised md-primary float-right" ng-click="doSetNewAsset(asset)">Save Asset</md-button>
+
+                </md-content>
+            </md-tab>
+        </md-tabs>
+    </md-content>
+    <hr>
+
+    {{ asset.filename }}
+</div>
+
+

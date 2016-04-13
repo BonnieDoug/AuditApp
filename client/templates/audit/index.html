@@ -1,61 +1,73 @@
-
 <div ui-view ng-init="getAudits()">
-
-    <!--<div ncy-breadcrumb></div>-->
-    <div class="grid-block">
-        <h1>View all audits</h1>
-    </div>
-
-    <span class="inline-label">
-        <input ng-model="query" type="text"
-           placeholder="Filter by" autofocus>
-        <span class="form-label"><img zf-iconic="" icon=" magnifying-glass" data-direction="top" size="medium"></span>
-    </span>
-
+<!--    <pre>
+    {{ audits|json }}
+    </pre>-->
     
-
-
-    <a class="expand success button" ui-sref="audit-new">Create New Audit</a>
-
+    <div class="grid-block wrap">
+        <div class="grid-content">
+            <h1>Audit Dashboard</h1>
+        </div>
+        <div class="small-12 medium-4 grid-content text-right">
+            <md-content>
+                <md-input-container class="md-icon-float md-block">
+                    <input ng-model="query" type="text" placeholder="Search audits..." autofocus>
+                    <md-icon class="name"><i class="material-icons">&#xE8B6;</i></md-icon>
+                </md-input-container>
+            </md-content>
+        </div>
+    </div>
+    <div class="grid-block">
+        <a class="success button" ui-sref="audit-new">
+            <i class="material-icons">&#xE89C;</i>
+            Create New Audit
+        </a>
+        <a class="success button" ui-sref="audit-new">
+            <i class="material-icons">&#xE89C;</i>
+            Create New Audit Type
+        </a>      
+    </div>
     <table class="text-center table-100">
         <tr>
-            <th>Audit Name</th>
-            <th class="show-for-medium-table">Description</th>        
-            <th class="show-for-medium-table">Audit Type</th>
-            <th class="show-for-medium-table">Created</th>
+            <th ng-click="sort('name')">Audit Name 
+                <i ng-show="sortKey == null" class="material-icons">&#xE258;</i>
+                <i ng-show="sortKey == 'name' && !reverse" class="material-icons">&#xE258;</i>
+                <i ng-show="sortKey == 'name' && reverse" class="material-icons">&#xE25A;</i>
+            </th>
+            <th ng-click="sort('description')" class="show-for-medium-table">Description 
+                <i ng-show="sortKey == 'description' && !reverse" class="material-icons">&#xE258;</i>
+                <i ng-show="sortKey == 'description' && reverse" class="material-icons">&#xE25A;</i>
+            </th>        
+            <th ng-click="sort('audit_type_name')" class="show-for-medium-table">Audit Type
+                <i ng-show="sortKey == 'audit_type_name' && !reverse" class="material-icons">&#xE258;</i>
+                <i ng-show="sortKey == 'audit_type_name' && reverse" class="material-icons">&#xE25A;</i>
+            </th>
+            <th ng-click="sort('created_at')" class="show-for-medium-table">Created
+                <i ng-show="sortKey == 'created_at' && !reverse" class="material-icons">&#xE258;</i>
+                <i ng-show="sortKey == 'created_at' && reverse" class="material-icons">&#xE25A;</i>
+            </th>
             <th>Actions</th>
         </tr>
+        <tr dir-paginate="audit in audits| toArray: false | filter:query | orderBy: sortKey:reverse|itemsPerPage:5" ng-class="{leave: startFade}" ng-hide="audit.isHidden">
+        <!--<tr ng-repeat="audit in audits| toArray:false | filter:query | orderBy: sortKey:reverse" ng-class="{leave: startFade}" ng-hide="audit.isHidden">-->
 
-
-
-
-        <tr ng-repeat="audit in audits| toArray:false | filter:query | orderBy: 'name'">
-
-
-
-            <td><a ui-sref='audit-view'>{{audit.name}}</a></td>
-
+            <td><a ui-sref='audit-view({anauditid: audit.id})'>{{audit.name}}</a></td>
             <td class="show-for-medium-table">{{audit.description}}</td>
             <td class="show-for-medium-table">{{audit.audit_type_name}}</td>
             <td class="show-for-medium-table">{{audit.created_at}}</td>
-
             <td>
                 <div class="float-right" class="" zf-action-sheet="">
                     <div zf-as-button="" title="Actions"></div>
                     <div zf-as-content="" position="bottom">
-                        <p>What you wana do?</p>
                         <ul>
-                            <li><a ui-sref="audit-view">View</a></li>
+                            <li><a ui-sref="audit-view({anauditid: audit.id})">View</a></li>
                             <li><a ui-sref='audit-update({anauditid: audit.id})'>Edit</a></li>
                             <li><a ui-sref="take-audit({anauditid: audit.id})">Take Audit</a></li>
                             <li><a ui-sref="#">Assign</a></li>
                             <li>
                             <zf-action-sheet id="my-actionsheet">
-                                <zf-as-button><span class="button alert">Delete</span></zf-as-button>
-                                <zf-as-content position="top">
-                                    <p>Are you sure you want to delete this?</p>
-                                    <a class='button alert' ui-sref='audit-delete'>Yes, delete it now please. <img zf-iconic="" icon="circle-x" size="medium"></a>
-                                </zf-as-content>
+                                <md-button class="md-primary md-raised" ng-click="showConfirm($event, audit.id, $index)" >
+                                    Retire Audit
+                                </md-button>
                             </zf-action-sheet>
                             </li>
                         </ul>
@@ -63,25 +75,13 @@
                 </div>
             </td>
         </tr>
+    </table>   
 
-
-    </table>
-
-    <h3>This is a great place for pagination, though this one looks nice it doesn't really do anything yet.</h3>
-
-    <nav role="navigation">
-        <ul class="cd-pagination ">
-            <li><a class="button primary" href="#0">Prev</a></li>
-            <li class="show-for-medium-inline"><a href="#0">1</a></li>
-            <li class="show-for-medium-inline"><a href="#0">2</a></li>
-            <li class="show-for-medium-inline"><a class="current" href="#0">3</a></li>
-            <li class="show-for-medium-inline"><a href="#0">4</a></li>
-            <li class="show-for-medium-inline"><span>...</span></li>
-            <li class="show-for-medium-inline"><a href="#0">20</a></li>
-            <li><a class="button primary" href="#0">Next</a></li>
-        </ul>
-    </nav> 
-
+    <dir-pagination-controls
+        max-size="5"
+        direction-links="true"
+        boundary-links="true" >
+    </dir-pagination-controls>
 
 </div>
 

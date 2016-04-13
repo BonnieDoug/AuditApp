@@ -1,31 +1,46 @@
-app.factory("AuthChecker", function($http, $q, $window, DataSender) {
-  var userInfo;
+app.factory("AuthChecker", ['$http', '$window',
+    function ($http, $window) { // This service connects to our REST API
 
-  function login(user) {
-    var deferred = $q.defer();
+        var self = {};
+        self.parseJwt = function (token) {
+            var base64Url = token.split('.')[1];
+            var base64 = base64Url.replace('-', '+').replace('_', '/');
+            return JSON.parse($window.atob(base64));
+        };
+        self.saveToken = function (token) {
+            $window.localStorage['jwtToken'] = token;
+        };
+        self.getToken = function () {
+            return $window.localStorage['jwtToken'];
+        };
+        self.handleRequest = function (res) {
+            var token = res.data ? res.data.token : null;
+            if (token) {
+                console.log('JWT:', token);
+            }
+            return res.data.message;
+        }
 
-    DataSender.post("/Security/Login", {
-      user: user
-    }).then(function(result) {
-      userInfo = {
-        accessToken: result.data.access_token,
-        userName: result.data.userName
-      };
-      userInfo = {
-                    accessToken: results.token,
-                    userName: results.username
-                };
-      sessionStorage["userInfo"] = JSON.stringify(userInfo);
-      deferred.resolve(userInfo);
-    }, function(error) {
-      deferred.reject(error);
-    });
+        self.isAuthed = function () {
+           
+            var token = self.getToken();
+            if (token) {
+                var params = self.parseJwt(token);
+                return Math.round(new Date().getTime() / 1000) <= params.exp;
+            } else {
+                return false;
+            }
+        }
 
-    return deferred.promise;
-  }
+        self.logout = function () {
+            $window.localStorage.removeItem('jwtToken');
+        }
 
-  return {
-    login: login
-  };
-});
+
+        self.getParsedToken = function(){
+            return self.parseJwt(self.getToken());
+        }
+
+        return self;
+    }]);
 

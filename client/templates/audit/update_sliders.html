@@ -1,0 +1,133 @@
+<div ui-view ng-init="doGetAudit()">
+
+    <md-progress-circular style="display: block; position: relative; margin: auto; width: 100%;" md-diameter="400" ng-hide="dataLoaded">Loading...</md-progress-circular>
+    <!--<div ng-show="dataLoaded" layout-padding class="grid-block wrap">-->
+    <h1>Update Audit: {{audit.name}}</h1>
+    <!--</div>-->
+    <!--<div class="">-->
+    <p class='lead'>Update Audit.</p>
+
+    <!--THIS IS THE PAGE HEADER SECTION-->
+
+    <div ng-show="dataLoaded" layout-padding class="grid-block wrap">
+        <div class="small-12 medium-4" >
+            <md-input-container class="md-block" flex-gt-sm>        
+                <label>Audit Name</label>
+                <input ng-model="audit.name" id="audit_name" type="text">
+            </md-input-container>
+        </div>
+        <div class="small-12 medium-4">
+            <md-input-container class="md-block" flex-gt-sm> 
+                <label for="short_description">
+                    Description</label>
+                <input  ng-model="audit.description" id="short_description" type="text">
+            </md-input-container>
+        </div>
+        <div class="small-12 medium-4">            
+            <md-input-container class="md-block" flex-gt-sm>
+                <label> Question Type</label>
+                <md-select ng-model="audit.auditType" ng-model-options="{trackBy: '$value.id'}">
+                    <md-option ng-value="type" ng-repeat="type in auditTypes">{{ type.name}}</md-option>
+                </md-select>
+            </md-input-container>
+        </div>
+    </div>
+    <!--<form name="userForm" novalidate>-->
+    <hr>
+
+    <!--START THE GROUPS-->
+    <div  ng-show="dataLoaded" layout-padding class="grid-block wrap group" ng-repeat="group in audit.groups">
+        <!--THIS IS THE GROUP HEADERS-->        
+        <!--<div class="grid-block grbanoup-title-bar">-->
+        <div class="small-9 large-11">
+            <md-input-container class="md-block" flex-gt-sm>        
+                <label>Group Name</label>
+                <input ng-model="group.name" name="groupName" type="text" value="">
+            </md-input-container>
+        </div>
+        <div class=" small-3 large-1 ">
+            <md-button class="float-right button margin-auto md-fab alert" ng-click="removeGroup($index)"><img class="anti-margin" zf-iconic="" icon="ban"  size="small"></md-button>
+        </div>
+        <!--</div>-->
+        <!--THIS IS THE QUESTIONS-->
+        <div layout-padding class="grid-block small-12 wrap alternate" ng-repeat="question in group.questions">
+            <div class="small-12 medium-8 large-4">
+                <md-input-container class="md-block" flex-gt-sm>        
+                    <label>Question {{$parent.$index + 1}}.{{$index + 1}}</label>
+                    <textarea ng-model="question.question" md-maxlength="150" rows="5" md-select-on-focus></textarea>                    
+                </md-input-container>
+            </div>
+            <div class="small-12 medium-4 large-2">                                
+                <md-input-container class="md-block" flex-gt-sm>
+                    <label> Question Type</label>
+                    <md-select ng-model="question.answerType" ng-model-options="{trackBy: '$value.id'}">
+                        <md-option ng-value="option" ng-repeat="option in questionTypes">{{ option.name}}</md-option>
+                    </md-select>
+                </md-input-container>
+            </div>
+            <div class="small-6 medium-2 large-1 minus-margin-top">
+                <label class="small-label">Answer Required</label>
+
+                <div>
+                    <div class="switch-label float-left">No</div>
+                    <div class="switch-label float-right">Yes</div>
+                </div>
+                <md-slider class="md-primary" flex min="0" max="1" ng-model="question.answerRequired"></md-slider>
+            </div>
+            <div class="small-6 medium-2 large-1 minus-margin-top">
+                <label class="small-label">Add Evidence</label>
+                <div>
+                    <label class="switch-label float-left">No</label>
+                    <label class="switch-label float-right">Yes</label>
+                </div>
+                <md-slider class="md-primary" flex min="0" max="1" ng-change="question.addEvidence ? 1 : question.evidenceRequired = 0" ng-model="question.addEvidence"></md-slider>
+
+
+            </div>
+            <div class="small-6 medium-2 large-1 minus-margin-top">
+                <label class="small-label">Evidence Required?</label>
+
+                <div>
+                    <label class="switch-label float-left">No</label>
+                    <label class="switch-label float-right">Yes</label>
+                </div>
+                <md-slider class="md-primary" flex min="0" max="1" ng-disabled="question.addEvidence !== 1" ng-model="question.evidenceRequired"></md-slider>
+
+
+            </div>
+            <div class="small-6 medium-2 large-1 minus-margin-top">
+                <label class="small-label">Add Expiry?</label>
+
+                <div>
+                    <label class="switch-label float-left">No</label>
+                    <label class="switch-label float-right">Yes</label>
+                </div>
+                <md-slider class="md-primary" flex min="0" max="1" ng-change="question.addExpiry ? 1 : question.expiryRequired = 0" ng-model="question.addExpiry"></md-slider>
+
+
+
+            </div>
+            <div class="small-6 medium-2 large-1 minus-margin-top">
+
+                <div style="position: relative;"><label class="small-label">Expiry Required?</label>
+                    <label class="switch-label float-left">No</label>
+                    <label class="switch-label float-right">Yes</label>
+                </div>
+                <md-slider class="md-primary" flex min="0" max="1" ng-disabled="question.addExpiry !== 1" ng-model="question.expiryRequired"></md-slider>
+
+
+            </div>
+            <div class="small-6 medium-2 large-1">
+                <md-button class="float-right button margin-auto md-fab alert " ng-click="removeQuestion($parent.$index, $index)"><img style="margin:-3px 0 0 0;" zf-iconic="" icon="ban"  size="small"></md-button>
+            </div>
+        </div>
+        <div class="small-12">
+            <button class="button success expand md-hue-2" ng-click="addQuestion($index)">Add New Question to Group</button>
+        </div>
+    </div>
+    <!--END THE GROUPS-->
+    <button class='button success expand' ng-click="addGroup()">Add New Group</button>
+    <button class='primary button expand'>Save Audit</button>
+</div>
+
+{{audit}}

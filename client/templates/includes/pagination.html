@@ -1,0 +1,33 @@
+<hr>
+<nav role="navigation">
+    
+    <h6 class=""><small>Page {{ pagination.current }} of {{pagination.last}}</small></h6>
+    
+    <ul ng-if="1 < pages.length || !autoHide" class="cd-pagination v-align" style="justify-content: center">
+        <li class="" ng-if="boundaryLinks">
+            <a href="" class="button primary show-for-medium" ng-class="{ disabled : pagination.current == 1 }" ng-click="setCurrent(1)">
+                <i class="material-icons">&#xE020;</i>
+            </a>
+        </li>
+        <li ng-if="directionLinks">
+            <a href="" class="button primary" ng-class="{ disabled : pagination.current == 1 }" ng-click="setCurrent(pagination.current - 1)">
+                <i class="material-icons">&#xE045;</i>
+            </a>
+        </li>
+        <li class="align-center" ng-repeat="pageNumber in pages track by tracker(pageNumber, $index)">
+            <a href="" class="button secondary show-for-medium" ng-class="{ current : pagination.current == pageNumber, disabled : pageNumber == '...' }" ng-click="setCurrent(pageNumber)">
+                {{ pageNumber}}
+            </a>
+        </li>
+        <li ng-if="directionLinks">
+            <a href="" class="button primary" ng-class="{ disabled : pagination.current == pagination.last }" ng-click="setCurrent(pagination.current + 1)">
+                <i class="material-icons">&#xE044;</i>
+            </a>
+        </li>
+        <li class="" ng-if="boundaryLinks">
+            <a href="" class="button primary show-for-medium" ng-class="{ disabled : pagination.current == pagination.last }" ng-click="setCurrent(pagination.last)">
+                <i class="material-icons">&#xE01F;</i>
+            </a>
+        </li>
+    </ul>
+</nav> 

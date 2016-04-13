@@ -2,17 +2,27 @@ body{
     background-color: $secondary-color;
 }
 
+
 .container-padding{
     box-shadow: 10px 10px 44px 3px rgba(0,0,0,0.75);
     background-color: white;
-    padding: 20px;
+    padding: 0 20px 20px 20px;
     /*margin: 0 4%;*/
 }
 
-
 .off-canvas{
     border: 1px solid darken($primary-color, 10%);
+    z-index: 30;
+    /*    height: auto !important;
+        width: 100% !important;*/
+
 }
+/*.off-canvas{
+@include show-for(medium, table-cell);
+    bottom: 0 !important;
+    top: 80vh !important;
+}*/
+
 
 
 footer{
@@ -84,11 +94,11 @@ select{
 }
 
 .show-for-medium-inline {
-@include show-for(medium, inline-block);
+    @include show-for(medium, inline-block);
     //display: inline-block !important;
 }
 .show-for-medium-table {
-@include show-for(medium, table-cell);
+    @include show-for(medium, table-cell);
     //display: inline-block !important;
 }
 
@@ -135,16 +145,52 @@ label{
 }
 
 
+/*.grid-block .text-align:first-child{
+    text-align: left;
+}*/
 
-.grid-block .text-align{
+
+
+.grid-block .text-align:first-child:not(:last-child){
+        text-align: left;
+}
+.grid-block .text-align:last-child:not(:first-child){
+        text-align: right;
+}
+
+ /*.text-align:nth-first-child(n) ~  .text-align:first-child{*/
+.grid-block .text-align:not(:first-child):not(:last-child){
     text-align: center;
 }
 
-.grid-block .text-align:first-child{
-    text-align: left;
-}
-
-.grid-block .text-align:last-child{
+/* .text-align:nth-last-child(n+1) ~  .text-align:last-child{
+.grid-block .text-align:nth-last-child{
     text-align: right;
 }
+.grid-block .text-align{
+    text-align: center;
+}*/
 
+
+
+
+.default{
+    opacity: 1;
+}
+
+.fade{
+    -webkit-transition: opacity 2s; /* For Safari 3.1 to 6.0 */
+    transition: opacity 2s;
+    opacity: 0;
+}
+
+.new-asset .md-datepicker-input-container {
+    width: calc(100% - 65px);
+}
+.new-asset .md-datepicker-input {
+    width: 100%;
+}
+
+.preview-image{
+    max-width: 300px;
+}

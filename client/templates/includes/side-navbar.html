@@ -1,7 +1,10 @@
-    <zf-offcanvas id="menuBar" animation-out="slideOutLeft" zf-swipe-close="left" position="left" class="primary">
+   
+
+
+<zf-offcanvas id="menuBar" animation-out="slideOutLeft" zf-swipe-close="left" position="left" class="primary">
         <br>
         <a zf-close="menuBar" class="button warning expand">Close Menu <img zf-iconic="" icon="circle-x"  size="small"></a>
-        <div class="dark card"> 
+<!--        <div class="dark card"> 
 
             <img src="http://placehold.it/350x200">
             <div class="card-divider">
@@ -11,11 +14,13 @@
                 <h4>Audit App</h4>
                 <p>123 street, someplace, somewhere. s41 s41.</p>
             </div>
-        </div>   
+        </div>   -->
         <ul class="vertical menu-bar primary">
             <li><a  ui-sref-active="active-link-class" ui-sref="home" zf-close="menuBar" >Dashboard <img zf-iconic="" class="right" icon="chevron" data-direction="right" size="medium"></a></li>
             <li><a  ui-sref-active="active-link-class" ui-sref="auditcp" zf-close="menuBar" >Manage Audits <img zf-iconic="" class="right" icon="chevron" data-direction="right" size="medium"></a></li>
-            <li><a  ui-sref-active="active-link-class" ui-sref="auditnew" zf-close="menuBar" >Create Audit <img zf-iconic="" class="right" icon="chevron" data-direction="right" size="medium"></a></li>
+            <li><a  ui-sref-active="active-link-class" ui-sref="audit-new" zf-close="menuBar" >Create Audit <img zf-iconic="" class="right" icon="chevron" data-direction="right" size="medium"></a></li>
+            <li><a  ui-sref-active="active-link-class" ui-sref="assets-index" zf-close="menuBar" >Asset Manager <img zf-iconic="" class="right" icon="chevron" data-direction="right" size="medium"></a></li>
+            <li><a  ui-sref-active="active-link-class" ui-sref="reporting-index" zf-close="menuBar" >Reporting Suite <img zf-iconic="" class="right" icon="chevron" data-direction="right" size="medium"></a></li>
             <li><a  ui-sref-active="active-link-class" ui-sref="settings" zf-close="menuBar" >Settings <img zf-iconic="" class="right" icon="chevron" data-direction="right" size="medium"></a></li>
             <li><a  ui-sref-active="active-link-class" ui-sref="login" zf-close="menuBar" >Login <img zf-iconic="" class="right" icon="chevron" data-direction="right" size="medium"></a></li>
         </ul>
