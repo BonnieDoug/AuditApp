@@ -5,18 +5,18 @@
         <group>
             <file>file:/var/www/html/AuditApp/client/assets/js/app.js</file>
             <file>file:/var/www/html/AuditApp/client/assets/js/controllers/AssetController.js</file>
-            <file>file:/var/www/html/AuditApp/client/assets/scss/app.scss</file>
-            <file>file:/var/www/html/AuditApp/client/templates/audit/index.html</file>
-            <file>file:/var/www/html/AuditApp/client/templates/assets/view.html</file>
+            <file>file:/var/www/html/AuditApp/client/templates/assets/partials/nothing-found.html</file>
             <file>file:/var/www/html/AuditApp/client/assets/scss/_stuff.scss</file>
-            <file>file:/var/www/html/AuditApp/client/templates/assets/byType.html</file>
-            <file>file:/var/www/html/AuditApp/client/assets/js/controllers/TabsController.js</file>
-            <file>file:/var/www/html/AuditApp/gulpfile.js</file>
-            <file>file:/var/www/html/AuditApp/client/templates/audit/update.html</file>
+            <file>file:/var/www/html/AuditApp/client/templates/assets/assets-by-group.html</file>
+            <file>file:/var/www/html/AuditApp/client/templates/assets/partials/table-head.html</file>
+            <file>file:/var/www/html/AuditApp/client/templates/assets/asset-types.html</file>
             <file>file:/var/www/html/AuditApp/client/templates/assets/new.html</file>
             <file>file:/var/www/html/AuditApp/client/templates/assets/assets-all.html</file>
-            <file>file:/var/www/html/AuditApp/client/assets/scss/custom/_filedropper.scss</file>
-            <file>file:/var/www/html/AuditApp/client/assets/js/controllers/AuditController.js</file>
+            <file>file:/var/www/html/AuditApp/client/assets/js/services/AuthChecker.js</file>
+            <file>file:/var/www/html/AuditApp/client/templates/assets/partials/assign-dialog.html</file>
+            <file>file:/var/www/html/AuditApp/client/templates/assets/assets-by-type.html</file>
+            <file>file:/var/www/html/AuditApp/client/templates/assets/asset-groups.html</file>
+            <file>file:/var/www/html/AuditApp/client/templates/assets/partials/table-body.html</file>
         </group>
     </open-files>
 </project-private>

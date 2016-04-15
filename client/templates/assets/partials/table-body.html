@@ -1,0 +1,30 @@
+<td>{{asset.forename}} <i>{{asset.middlename}}</i> <b>{{asset.surname}}</b></td>
+<td class="show-for-medium-table">{{asset.address1}}, {{asset.address2}}</td>
+<td class="show-for-medium-table">{{asset.county}}</td>
+<td class="show-for-medium-table">{{asset.country}}</td>
+<td class="show-for-medium-table">{{asset.postcode}}</td>
+<td class="show-for-medium-table">{{asset.type_name}}</td>
+<td class="show-for-medium-table"><img class="thumbnail preview-image" src="http://localhost/Filestore/images/{{asset.image}}"></td>
+<td>
+    <div id="zfSheet" class="float-right" class="" zf-action-sheet="">
+        <div zf-as-button="" title="Actions"></div>
+        <div zf-as-content="" position="bottom">
+            <ul>
+                <li><a ui-sref="asset-view({anauditid: audit.id})">View</a></li>
+                <li><a ui-sref='asset-update({anauditid: audit.id})'>Edit</a></li>
+                <li>    
+                    <md-button class="md-primary md-raised" zf-close="zfSheet" ng-click="showAdvanced($event, asset)">
+                        Custom Dialog
+                    </md-button>
+                </li>
+                <li>
+                <zf-action-sheet id="my-actionsheet">
+                    <md-button class="md-primary md-raised" ng-click="showConfirm($event, asset.id, $index)" >
+                        Retire Asset
+                    </md-button>
+                </zf-action-sheet>
+                </li>
+            </ul>
+        </div>
+    </div>
+</td>
