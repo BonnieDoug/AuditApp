@@ -1,118 +1,17 @@
-app.controller('AssetController', function ($scope, DataSender, $stateParams, Upload, $mdDialog, $mdMedia, FoundationApi, $timeout, $state, $q, AuthChecker) {
-
-
-function DemoCtrl ($timeout, $q) {
-    var self = this;
-
-    self.readonly = false;
-    self.selectedItem = null;
-    self.searchText = null;
-    self.querySearch = querySearch;
-    self.vegetables = loadVegetables();
-    self.selectedVegetables = [];
-   
-    self.getSelectedChipIndex = function(event, chip) {   
-      
-      console.log(chip);
-      
-     //var selectedChip = angular.element(event.currentTarget).controller('mdChips').selectedChip;
-     //alert(selectedChip);
-   }  
-    
-     self.createChip = function(_val) {
-       
-      if(typeof _val === 'string'){
-        
-        var data = {
-          name: _val,
-          type: 'theType',
-          _lowername : _val.toLowerCase(),
-          _lowertype : 'thetype'
-        }
-        
-        
-        self.vegetables.push(data);
-        
-       // retrun data;
-      } 
-       else{
-         return _val;
-       }
-       
-    }
-    
-    
-    /**
-     * Search for vegetables.
-     */
-    function querySearch (query) {
-      var results = query ? self.vegetables.filter(createFilterFor(query)) : [];
-      return results;
-    }
-
-    /**
-     * Create filter function for a query string
-     */
-    function createFilterFor(query) {
-      var lowercaseQuery = angular.lowercase(query);
-
-      return function filterFn(vegetable) {
-        return (vegetable._lowername.indexOf(lowercaseQuery) === 0) ||
-            (vegetable._lowertype.indexOf(lowercaseQuery) === 0);
-      };
-
-    }
-
-    function loadVegetables() {
-      var veggies = [
-        {
-          'name': 'Broccoli',
-          'type': 'theType'
-        },
-        {
-          'name': 'R&D',
-          'type': 'theType'
-        },
-        {
-          'name': 'Server',
-          'type': 'theType'
-        },
-        {
-          'name': 'QA',
-          'type': 'theType'
-        },
-        {
-          'name': 'Product',
-          'type': 'theType'
-        }
-      ];
-
-      return veggies.map(function (veg) {
-        veg._lowername = veg.name.toLowerCase();
-        veg._lowertype = veg.type.toLowerCase();
-        return veg;
-      });
-    }
-  }
-
-
-
-
-
+app.controller('AssetController', function ($scope, DataSender, $stateParams, Upload, $mdDialog, $mdMedia, FoundationApi, $timeout, $state, $q) {
 
     $scope.previousState;
     $scope.currentState;
     $scope.$on('$stateChangeSuccess', function (ev, to, toParams, from, fromParams) {
         $scope.previousState = from.name;
         $scope.currentState = to.name;
-//        console.log('Previous state:' + $scope.previousState)
-//        console.log('Current state:' + $scope.currentState)
+        console.log('Previous state:' + $scope.previousState)
+        console.log('Current state:' + $scope.currentState)
     });
 
     $scope.doGetAllAssets = function () {
-        DataSender.post('Asset/', {
-            token: AuthChecker.getToken(),
-        }).then(function (data) {
+
+        DataSender.get('Asset').then(function (data) {
 
             if (data) {
 //                alert(data);
@@ -158,10 +57,7 @@ function DemoCtrl ($timeout, $q) {
     $scope.doGetAssetsByType = function () {
 
         $scope.tyname = $stateParams.astytype;
-
-        DataSender.post('Asset/getAllByType/' + $stateParams.astyid, {
-            token: AuthChecker.getToken(),
-        }).then(function (data) {
+        DataSender.get('Asset/getAllByType/' + $stateParams.astyid).then(function (data) {
             if (data) {
                 $scope.assets = data;
                 //alert(data);
@@ -171,13 +67,10 @@ function DemoCtrl ($timeout, $q) {
         });
     };
 
-    $scope.doGetAssetsByGroup = function (id) {
-
-        DataSender.post('Asset/getAllByGroup/' + $stateParams.asgrid, {
-            token: AuthChecker.getToken(),
-        }).then(function (data) {
+    $scope.doGetAssetByGroup = function (id) {
+        DataSender.get('Asset/get/' + id).then(function (data) {
             if (data) {
-                $scope.assets = data;
+                alert(data);
             } else {
                 alert("Failure");
             }
@@ -228,16 +121,12 @@ function DemoCtrl ($timeout, $q) {
         Counties;
         Countries;
 //        $scope.asset = {};
-        $scope.asset.county = null;
         $scope.asset.country = {};
         $scope.asset.country.id = 229;
-        $scope.asset.country.name = "United Kingdom";
     };
 
     $scope.doSetNewAsset = function (asset) {
-
-        DataSender.post('Asset/new', {
-            token: AuthChecker.getToken(),
+        DataSender.post("Asset/new", {
             asset: asset
         }).then(function (results) {
             alert(results);
@@ -267,7 +156,7 @@ function DemoCtrl ($timeout, $q) {
     $scope.doSetUpdateGroup = function () {};
     $scope.doSetNewType = function () {};
     $scope.doSetUpdateType = function () {};
-
+    
     $scope.doRetireAsset = function (id) {
         DataSender.post("Asset/retire", {
             id: id
@@ -318,63 +207,5 @@ function DemoCtrl ($timeout, $q) {
         });
     };
 
-    $scope.showAdvanced = function (ev, asset) {
-
-        var useFullScreen = ($mdMedia('sm') || $mdMedia('xs')) && $scope.customFullscreen;
-        $mdDialog.show({
-            controller: DialogController,
-            templateUrl: '../../../templates/assets/partials/assign-dialog.html',
-            parent: angular.element(document.body),
-            targetEvent: ev,
-            clickOutsideToClose: true,
-            fullscreen: useFullScreen,
-            scope: $scope.$new(),
-            resolve: {
-                asset: function () {
-                    $scope.asset = asset;
-                    var token = AuthChecker.getParsedToken();
-                    $scope.token = token.user.id;
-                    $scope.assignment = {};
-                    $scope.assignment.assigned_by = token.user.id;
-                    $scope.assignment.client_id = token.user.client;
-                    $scope.assignment.Assets_id = asset.id;
-                },
-                audits: function () {
-                    DataSender.post('Audit/', {
-                        token: AuthChecker.getToken(),
-                    }).then(function (data) {
-                        if (data) {
-
-                            return $scope.audits = data.audits;
-
-                        } else {
-                            alert("Failure");
-                        }
-                    });
-                }
-            }
-        });
-
-        $scope.$watch(function () {
-            return $mdMedia('xs') || $mdMedia('sm');
-        }, function (wantsFullScreen) {
-            $scope.customFullscreen = (wantsFullScreen === true);
-        });
-    };
-
-
 });
 
-function DialogController($scope, $mdDialog) {
-
-
-    $scope.hide = function () {
-        $mdDialog.hide();
-    };
-    $scope.cancel = function () {
-        $mdDialog.cancel();
-    };
-    $scope.answer = function (answer) {
-        $mdDialog.hide(answer);
-    };
-}

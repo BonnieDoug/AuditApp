@@ -187,21 +187,10 @@ label{
 .new-asset .md-datepicker-input-container {
     width: calc(100% - 65px);
 }
-
 .new-asset .md-datepicker-input {
     width: 100%;
 }
 
 .preview-image{
     max-width: 300px;
-}
-
-.action-sheet{
-    z-index: 49;
-}
-
-md-dialog{
-    
-    
-    min-width: 50% !important;
 }

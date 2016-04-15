@@ -7,13 +7,13 @@
     </a>
     <div class="grid-block small-up-1 medium-up-2 large-up-4">
         <div class="grid-content">
-            <div class="warning card">
+            <div class="primary card">
                 <a ui-sref="assets-all"><img src="http://placehold.it/350x100"></a>
                 <div class="card-divider">
-                    <h4 class="text-center">All Assets</h4>
+                    <h4 class="text-center">All</h4>
                 </div>
                 <div class="card-section">
-                    <a class="button saturate-warning expand" ui-sref="assets-all">View all Assets</a>
+                    <a class="button saturate-primary expand" ui-sref="assets-all">All</a>
                 </div>
             </div>
         </div>
@@ -24,7 +24,7 @@
                     <h4 class="text-center">{{ group.name}}</h4>
                 </div>
                 <div class="card-section">
-                    <a class="button saturate-primary expand" ui-sref="asset-types({asgrtype: group.name, asgrid: group.id})">View {{ group.name}}</a>
+                    <a class="button saturate-primary expand" ui-sref="asset-types({asgrtype: group.name, asgrid: group.id})">{{ group.name}}</a>
                 </div>
             </div>
         </div>

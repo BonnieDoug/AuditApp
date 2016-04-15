@@ -1,7 +1,7 @@
 <div ui-view ng-init="doTakeAudit()">
-
-    {{ audit.answerType.options}} 
-
+    
+    {{ audit.answerType.options }} 
+    
     <h1>Proto of taking an audit.</h1>
     <div layout-padding class="grid-block wrap">
         <div layout-padding class="grid-block wrap">
@@ -19,9 +19,9 @@
             </div>
         </div>
         <div  layout-padding class="grid-block wrap group" ng-repeat="group in audit.groups">
-
-
-
+            
+            
+            
             <h2>{{ group.name}}</h2>
             <div layout-padding class="grid-block small-12 wrap alternate text-center" ng-repeat="question in group.questions" ng-model="takeAudit.answers[question.id].parent_question">
                 <div class="small-12 medium-3">
@@ -31,7 +31,7 @@
                 <div class="small-12 medium-2">
                     <label class="small-label">Answer</label>
                     <div class="grid-block" >                                                                      
-                        <div ng-repeat="option in question.answerType.options| orderObjectBy:'value'" class="grid-content text-align switch-label">{{option.name}}</div>
+                        <div ng-repeat="option in question.answerType.options | orderObjectBy:'value'" class="grid-content text-align switch-label">{{option.name}}</div>
                     </div>
                     <md-slider  ng-model="takeAudit.answers[question.id].score" class="md-primary" style="margin: 0 1rem" flex step="{{question.answerType.optionSteps}}" min="0" max="{{question.answerType.optionMax}}" ></md-slider>
                     {{takeAudit.answers[question.id].score}}
@@ -49,34 +49,9 @@
                         <textarea ng-model="takeAudit.answers[question.id].notes" md-maxlength="150" rows="5" md-select-on-focus></textarea>                    
                     </md-input-container>
                 </div>
-                <div class="small-12 medium-3" ng-if="question.addEvidence === 1">
+                <div class="small-12 medium-2" ng-if="question.addEvidence === 1">
                     <label>Evidence</label>
-                    <md-input-container class="md-block" flex-gt-sm>                       
-
-                        <div ngf-drop="onFileSelect($files)" class="drop-box" ng-model="asset.file"
-                             ngf-drag-over-class="'dragover'"
-                             ngf-pattern="'image/*,application/pdf'">
-
-                            <p style="padding: 5px; font-size: 110%; font-weight: bold;" ng-if="!asset.file">Drag and Drop Image Here or</p>
-
-                            <md-button ng-if="asset.file" style="position: absolute; top: 0; right: 0;" class="md-fab md-mini md-primary md-button md-ink-ripple" ng-click="asset.file = null" aria-label="Remove Image">
-                                <md-icon><i class="material-icons">&#xE872;</i></md-icon>
-                            </md-button>
-
-                            <img ng-if="asset.file"
-                                 ngf-src="asset.file" 
-                                 ngf-background="asset.file"          
-                                 ngf-no-object-url="true or false" 
-                                 >
-                            
-                            <div ng-hide="asset.file" class="button" ngf-select="onFileSelect($files)" ng-model="asset.file" name="file" ngf-pattern="'image/*'"
-                                 ngf-accept="'image/*'" ngf-max-size="20MB" ngf-min-height="100" 
-                                 >Select File</div>
-                            <div ngf-no-file-drop>File Drag/Drop is not supported for this browser</div>
-                        </div>
-
-
-                    </md-input-container>       
+                    <input ng-model="takeAudit.answers[question.id].evidence" type="file">
                 </div>
                 <div class="small-12 medium-2" ng-if="question.addEvidence === 0">                    
                     <label>No evidence required.</label>
@@ -84,7 +59,22 @@
             </div> 
         </div>
     </div>
-    <p>Audit Completion %</p>
+    <p>Audit Completion</p>
+    <div style="position: relative;">
+        <p>Low Example</p>
+        <label style="position: absolute; left: 18%; top:50px;">20%</label>
+        <meter min="0" max="100" low="25" high="75" optimum="100" value="20">20%</meter>
+    </div>
+    <div style="position: relative;">
+        <p>Medium Example</p>
+        <label style="position: absolute; left: 58%; top:50px;">60%</label>
+        <meter min="0" max="100" low="25" high="75" optimum="100" value="60">60%</meter>
+    </div>
+    <div style="position: relative;">
+        <p>High Example</p>
+        <label style="position: absolute; left: 88%; top:50px;">90%</label>
+        <meter min="0" max="100" low="25" high="75" optimum="100" value="90">90%</meter>
+    </div>
     <md-progress-linear md-mode="determinate" value="60"></md-progress-linear>
 </div>
 

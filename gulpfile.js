@@ -50,18 +50,14 @@ var paths = {
     'bower_components/angular-toArrayFilter/toArrayFilter.js',
     'bower_components/foundation-apps/js/vendor/**/*.js',
     'bower_components/foundation-apps/js/angular/**/*.js',
-
     '!bower_components/foundation-apps/js/angular/app.js'
   ],
   // These files are for your app's JavaScript
   appJS: [
     'client/assets/js/app.js',
-    'node_modules/ng-file-upload/dist/ng-file-upload-shim.min.js',
-    'client/assets/js/angular-breadcrumb.js',
-//    'bower_components/ui-select/dist/select.js',
     'node_modules/angular-aria/angular-aria.min.js',
     'node_modules/angular-material/angular-material.js',
-    'client/assets/js/breadcrumbs.js',
+    'client/assets/js/c1.js',
     'client/assets/js/services/**.js',
     'client/assets/js/controllers/**.js',
     'bower_components/angular-breadcrumb/dist/angular-breadcrumb.min.js',
