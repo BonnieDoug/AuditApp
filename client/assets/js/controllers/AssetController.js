@@ -1,21 +1,25 @@
-app.controller('AssetController', function ($scope, DataSender, $stateParams, Upload, $mdDialog, $mdMedia, FoundationApi, $timeout, $state, $q) {
+app.controller('AssetController', function ($scope, DataSender, $stateParams, Upload, $mdDialog, $mdMedia, FoundationApi, $timeout, $state, $q, AuthChecker) {
 
     $scope.previousState;
     $scope.currentState;
     $scope.$on('$stateChangeSuccess', function (ev, to, toParams, from, fromParams) {
         $scope.previousState = from.name;
         $scope.currentState = to.name;
-        console.log('Previous state:' + $scope.previousState)
-        console.log('Current state:' + $scope.currentState)
+//        console.log('Previous state:' + $scope.previousState)
+//        console.log('Current state:' + $scope.currentState)
     });
 
     $scope.doGetAllAssets = function () {
-
-        DataSender.get('Asset').then(function (data) {
+        DataSender.post('Asset/', {
+            token: AuthChecker.getToken(),
+        }).then(function (data) {
 
             if (data) {
 //                alert(data);
-                $scope.assets = data;
+
+
+    console.log(data);
+                $scope.assets = data.assets;
             } else {
                 alert("Failure");
             }
@@ -57,7 +61,10 @@ app.controller('AssetController', function ($scope, DataSender, $stateParams, Up
     $scope.doGetAssetsByType = function () {
 
         $scope.tyname = $stateParams.astytype;
-        DataSender.get('Asset/getAllByType/' + $stateParams.astyid).then(function (data) {
+
+        DataSender.post('Asset/getAllByType/' + $stateParams.astyid, {
+            token: AuthChecker.getToken(),
+        }).then(function (data) {
             if (data) {
                 $scope.assets = data;
                 //alert(data);
@@ -67,10 +74,13 @@ app.controller('AssetController', function ($scope, DataSender, $stateParams, Up
         });
     };
 
-    $scope.doGetAssetByGroup = function (id) {
-        DataSender.get('Asset/get/' + id).then(function (data) {
+    $scope.doGetAssetsByGroup = function (id) {
+
+        DataSender.post('Asset/getAllByGroup/' + $stateParams.asgrid, {
+            token: AuthChecker.getToken(),
+        }).then(function (data) {
             if (data) {
-                alert(data);
+                $scope.assets = data;
             } else {
                 alert("Failure");
             }
@@ -121,12 +131,16 @@ app.controller('AssetController', function ($scope, DataSender, $stateParams, Up
         Counties;
         Countries;
 //        $scope.asset = {};
+        $scope.asset.county = null;
         $scope.asset.country = {};
         $scope.asset.country.id = 229;
+        $scope.asset.country.name = "United Kingdom";
     };
 
     $scope.doSetNewAsset = function (asset) {
-        DataSender.post("Asset/new", {
+
+        DataSender.post('Asset/new', {
+            token: AuthChecker.getToken(),
             asset: asset
         }).then(function (results) {
             alert(results);
@@ -156,7 +170,7 @@ app.controller('AssetController', function ($scope, DataSender, $stateParams, Up
     $scope.doSetUpdateGroup = function () {};
     $scope.doSetNewType = function () {};
     $scope.doSetUpdateType = function () {};
-    
+
     $scope.doRetireAsset = function (id) {
         DataSender.post("Asset/retire", {
             id: id
@@ -207,5 +221,63 @@ app.controller('AssetController', function ($scope, DataSender, $stateParams, Up
         });
     };
 
+    $scope.showAdvanced = function (ev, asset) {
+
+        var useFullScreen = ($mdMedia('sm') || $mdMedia('xs')) && $scope.customFullscreen;
+        $mdDialog.show({
+            controller: DialogController,
+            templateUrl: '../../../templates/assets/partials/assign-dialog.html',
+            parent: angular.element(document.body),
+            targetEvent: ev,
+            clickOutsideToClose: true,
+            fullscreen: useFullScreen,
+            scope: $scope.$new(),
+            resolve: {
+                asset: function () {
+                    $scope.asset = asset;
+                    var token = AuthChecker.getParsedToken();
+                    $scope.token = token.user.id;
+                    $scope.assignment = {};
+                    $scope.assignment.assigned_by = token.user.id;
+                    $scope.assignment.client_id = token.user.client;
+                    $scope.assignment.Assets_id = asset.id;
+                },
+                audits: function () {
+                    DataSender.post('Audit/', {
+                        token: AuthChecker.getToken(),
+                    }).then(function (data) {
+                        if (data) {
+
+                            return $scope.audits = data.audits;
+
+                        } else {
+                            alert("Failure");
+                        }
+                    });
+                }
+            }
+        });
+
+        $scope.$watch(function () {
+            return $mdMedia('xs') || $mdMedia('sm');
+        }, function (wantsFullScreen) {
+            $scope.customFullscreen = (wantsFullScreen === true);
+        });
+    };
+
+
 });
 
+function DialogController($scope, $mdDialog) {
+
+
+    $scope.hide = function () {
+        $mdDialog.hide();
+    };
+    $scope.cancel = function () {
+        $mdDialog.cancel();
+    };
+    $scope.answer = function (answer) {
+        $mdDialog.hide(answer);
+    };
+}

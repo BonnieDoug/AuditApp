@@ -103,6 +103,8 @@ app.controller('AuditController', function ($scope, DataSender, $stateParams, $m
         return element.name.match(/^Ma/) ? true : false;
     };
     $scope.doTakeAudit = function () {
+        
+        alert("doTakeAudit");
         DataSender.post('Audit/takeAudit/' + $stateParams.anauditid, {
             token: AuthChecker.getToken(),
         }).then(function (audit) {
@@ -120,7 +122,8 @@ app.controller('AuditController', function ($scope, DataSender, $stateParams, $m
         ;
     };
     $scope.doGetAudit = function () {
-        $scope.getInitialAuditData();
+        alert("HERE");
+//        $scope.getInitialAuditData();
         $scope.dataLoaded = false;
         
         DataSender.post('Audit/getAudit/' + $stateParams.anauditid, {

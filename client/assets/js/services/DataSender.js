@@ -1,5 +1,5 @@
-app.factory("DataSender", ['$http', '$state',
-    function ($http, $state) { // This service connects to our REST API
+app.factory("DataSender", ['$http', '$state', 'AuthChecker',
+    function ($http, $state, AuthChecker) { // This service connects to our REST API
 
         var serviceBase = 'http://localhost/SolutionMVC/public/';
 
@@ -16,6 +16,13 @@ app.factory("DataSender", ['$http', '$state',
         };
         obj.post = function (q, object) {
             return $http.post(serviceBase + q, object).then(function successCallback(response) {
+//                alert(response.data.token);
+            if(response.data.token){
+                alert(response.data.token);
+                AuthChecker.saveToken(response.data.token);
+            }else{
+                alert("Still got here ???" + response.data.token);
+            }
                 return response.data;
             }, function errorCallback(response) {                
                 if (response.status === 401) {

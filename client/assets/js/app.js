@@ -4,6 +4,7 @@
         'ui.router',
         'angular-toArrayFilter',
 //        'ngRoute',
+//        'ui-select',
         'as.sortable',
         'ngAria',
         'ngMaterial',
@@ -14,6 +15,7 @@
         'ncy-angular-breadcrumb',
         'angularUtils.directives.dirPagination',
         'ngFileUpload'
+        
     ])
             .config(config)
             .run(run)
@@ -178,7 +180,7 @@
                 .state('assets-index', {
                     url: 'asset-manager/',
                     parent: 'home',
-                    templateUrl: 'templates/assets/index.html',
+                    templateUrl: 'templates/assets/asset-groups.html',
                     controller: 'AssetController',
                     authenticate: true,
                     resolve: {
@@ -190,13 +192,25 @@
                 .state('asset-types', {
                     url: ':asgrtype/:asgrid',
                     parent: 'assets-index',
-                    templateUrl: 'templates/assets/types.html',
+                    templateUrl: 'templates/assets/asset-types.html',
                     controller: 'AssetController',
                     authenticate: true,
                     resolve: {
                     },
                     ncyBreadcrumb: {
                         label: '{{ grname }}'
+                    }
+                })
+                .state('asset-all-by-type', {
+                    url: '/all',
+                    parent: 'asset-types',
+                    templateUrl: 'templates/assets/assets-by-group.html',
+                    controller: 'AssetController',
+                    authenticate: true,
+                    resolve: {
+                    },
+                    ncyBreadcrumb: {
+                        label: 'All'
                     }
                 })
                 .state('asset-by-type', {

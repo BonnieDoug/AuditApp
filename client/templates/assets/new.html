@@ -8,7 +8,7 @@
                     <h1 class="md-display-2">Asset Type</h1>
                     <label>Asset Group
 
-                        
+
                         <md-button                            
                             class="md-icon-button launch" >
                             <i ng-if="!asset.AssetGroups_id" style='color:red;' class="material-icons">&#xE002;</i>
@@ -47,7 +47,7 @@
                              ngf-pattern="'image/*,application/pdf'">
 
                             <h3 ng-if="!asset.file">Drag and Drop Image Here</h3>
-                            
+
                             <img ng-if="asset.file"
                                  ngf-src="asset.file" 
                                  ngf-background="asset.file"          
@@ -139,16 +139,49 @@
 
                     <md-input-container class="md-block" flex-gt-sm>     
                         <label>County</label>
-                        <md-select ng-model="asset.county" placeholder="Select a County">
-                            <md-option  ng-value="county.id" ng-repeat="county in Counties">{{ county.name}}</md-option>
-                        </md-select>
+
+                        <md-autocomplete                            
+
+                            md-search-text="searchText"
+                            md-items="county in Counties | filter:searchText"
+                            md-item-text="county.name"
+                            md-min-length="0"
+                            placeholder="Select a county..."
+                            md-selected-item="asset.county"
+                            >
+                            <!--{{  selected | json }}-->
+
+                            <md-item-template>
+                                <span md-highlight-text="searchText" md-highlight-flags="^i">{{county.name}}</span>
+
+                            </md-item-template>
+                        </md-autocomplete>
+                        <!--<input ng-model='asset.county' value='county.id' type="hidden">-->
+                        <!--{{  county | json }}-->
+
+                        <!--                        <md-select ng-model="asset.county" placeholder="Select a County">
+                                                    <md-option  ng-value="county.id" ng-repeat="county in Counties">{{ county.name}}</md-option>
+                                                </md-select>-->
                     </md-input-container>
                     <br><br>
                     <md-input-container class="md-block" flex-gt-sm>            
                         <label>Country</label>
-                        <md-select ng-model="asset.country.id" ng-model-options="{trackBy: '$value'}">
-                            <md-option ng-value="country.id" ng-repeat="country in Countries">{{ country.name}}</md-option>
-                        </md-select>
+                        <md-autocomplete
+                            md-search-text="searchText1"
+                            md-items="country in Countries | filter:searchText1"
+                            md-item-text="country.name"
+                            md-min-length="0"
+                            placeholder="Select a country..."
+                            md-selected-item="asset.country"
+                            >
+                            <md-item-template>
+                                <span md-highlight-text="searchText1" md-highlight-flags="^i">{{country.name}}</span>
+                            </md-item-template>
+                        </md-autocomplete>
+                        <!--
+                            <md-select ng-model="asset.country.id" ng-model-options="{trackBy: '$value'}">
+                                <md-option ng-value="country.id" ng-repeat="country in Countries">{{ country.name}}</md-option>
+                            </md-select>-->
                     </md-input-container>
 
                     <md-button class="md-raised md-primary float-right" ng-click="doSetNewAsset(asset)">Save Asset</md-button>
@@ -158,8 +191,6 @@
         </md-tabs>
     </md-content>
     <hr>
-
-    {{ asset.filename }}
 </div>
 
 
