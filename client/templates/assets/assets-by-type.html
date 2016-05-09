@@ -1,8 +1,9 @@
 <div ui-view ng-init="doGetAssetsByType()">
 
+    
     <div class="grid-block wrap">
         <div class="grid-content">
-            <h1>{{ tyname}}'s</h1>
+            <h1>{{ tyname }}'s</h1>
         </div>
         <div class="small-12 medium-4 grid-content text-right">
             <md-content>
@@ -19,6 +20,8 @@
             Create a New Asset
         </a>    
     </div>
+    
+    
     <div class="grid-block small-up-1">
         <table ng-if='!!assets.length < 1' class="text-center table-100">
             <tr ng-include src="'./templates/assets/partials/table-head.html'">

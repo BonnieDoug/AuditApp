@@ -1,0 +1,65 @@
+<md-dialog aria-label="{{asset.forename}} - {{asset.middlename}} - {{asset.surname}}">
+    <!--<form>-->
+    <md-toolbar>
+        <div class="primary title-bar">
+            <div class="title">{{asset.forename}} <i>{{asset.middlename}}</i> <b>{{asset.surname}}</div>
+            <span flex></span>
+            <a class="close-button" ng-click="cancel()">
+                x
+            </a>
+        </div>
+    </md-toolbar>
+    <md-dialog-content style="max-width:800px;max-height:810px; ">
+
+        <form>
+            <label>Asset
+                <input type="text" disabled="disabled" placeholder="{{asset.forename}} <i>{{asset.middlename}}</i> <b>{{asset.surname}}">
+            </label>
+            <label>Audit
+                <!--<p>{{ $scope }}</p>-->
+            </label>
+            <!--<pre>{{ token | json }}</pre>-->
+            <p>Assigned By : {{ assignment.assigned_by}} </p>
+            <p>Client: {{ assignment.client_id}} </p>
+            <p>Asset ID: {{ assignment.Assets_id}}</p>
+            <!--<p>Audit ID: {{ Assignment.Audit.id}}</p>-->
+
+            <ui-select ng-model="selected.value">
+                <ui-select-match>
+                    <span ng-bind="$select.selected.name"></span>
+                </ui-select-match>
+                <ui-select-choices repeat="item in (audits | filter: $select.search) track by item.id">
+                    <span ng-bind="item.name"></span>
+                </ui-select-choices>
+            </ui-select>
+
+
+
+            <md-content layout-padding layout="column">
+                <form>
+
+                </form>
+            </md-content>
+
+
+
+            <md-autocomplete
+
+                md-search-text="searchText"
+                md-items="item in audits | filter:searchText"
+                md-item-text="item.name"
+                md-min-length="0"
+                placeholder="Select an audit."
+                md-selected-item="assignment.Audit"
+                >
+                <md-item-template>
+                    <span md-highlight-text="searchText" md-highlight-flags="^i">{{item.name}}</span>
+                </md-item-template>
+            </md-autocomplete>
+
+            <!--{{ Assignment }}-->
+        </form>
+        {{ assignment | json }} 
+    </md-dialog-content>
+
+</md-dialog>

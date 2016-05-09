@@ -66,7 +66,7 @@ app.controller('AssetController', function ($scope, DataSender, $stateParams, Up
             token: AuthChecker.getToken(),
         }).then(function (data) {
             if (data) {
-                $scope.assets = data;
+                $scope.assets = data.assets;
                 //alert(data);
             } else {
                 alert("Failure");

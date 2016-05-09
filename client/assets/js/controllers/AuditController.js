@@ -104,7 +104,7 @@ app.controller('AuditController', function ($scope, DataSender, $stateParams, $m
     };
     $scope.doTakeAudit = function () {
         
-        alert("doTakeAudit");
+//        alert("doTakeAudit");
         DataSender.post('Audit/takeAudit/' + $stateParams.anauditid, {
             token: AuthChecker.getToken(),
         }).then(function (audit) {
@@ -122,7 +122,7 @@ app.controller('AuditController', function ($scope, DataSender, $stateParams, $m
         ;
     };
     $scope.doGetAudit = function () {
-        alert("HERE");
+//        alert("HERE");
 //        $scope.getInitialAuditData();
         $scope.dataLoaded = false;
         

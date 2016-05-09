@@ -1,10 +1,10 @@
 app.factory("DataSender", ['$http', '$state', 'AuthChecker',
     function ($http, $state, AuthChecker) { // This service connects to our REST API
 
-        var serviceBase = 'http://localhost/SolutionMVC/public/';
+//        var serviceBase = 'http://localhost/SolutionMVC/public/';
 
         //Config for Sandbox
-//        var serviceBase = 'http://doug.portal.solutionhost.co.uk/apps/Audit/SolutionMVC/public/';
+        var serviceBase = 'http://doug.portal.solutionhost.co.uk/apps/Audit/SolutionMVC/public/';
 
         var obj = {};
         obj.get = function (q) {
@@ -18,10 +18,10 @@ app.factory("DataSender", ['$http', '$state', 'AuthChecker',
             return $http.post(serviceBase + q, object).then(function successCallback(response) {
 //                alert(response.data.token);
             if(response.data.token){
-                alert(response.data.token);
+//                alert(response.data.token);
                 AuthChecker.saveToken(response.data.token);
             }else{
-                alert("Still got here ???" + response.data.token);
+//                alert("Still got here ???" + response.data.token);
             }
                 return response.data;
             }, function errorCallback(response) {                

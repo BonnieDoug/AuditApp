@@ -180,7 +180,7 @@
                 .state('assets-index', {
                     url: 'asset-manager/',
                     parent: 'home',
-                    templateUrl: 'templates/assets/asset-groups.html',
+                    templateUrl: 'templates/assets/index.html',
                     controller: 'AssetController',
                     authenticate: true,
                     resolve: {
@@ -192,7 +192,7 @@
                 .state('asset-types', {
                     url: ':asgrtype/:asgrid',
                     parent: 'assets-index',
-                    templateUrl: 'templates/assets/asset-types.html',
+                    templateUrl: 'templates/assets/types.html',
                     controller: 'AssetController',
                     authenticate: true,
                     resolve: {
